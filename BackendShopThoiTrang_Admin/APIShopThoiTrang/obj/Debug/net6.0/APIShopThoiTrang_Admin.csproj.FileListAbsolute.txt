@@ -1,0 +1,7 @@
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.csproj.AssemblyReference.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.GeneratedMSBuildEditorConfig.editorconfig
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.AssemblyInfoInputs.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.AssemblyInfo.cs
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.csproj.CoreCompileInputs.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.MvcApplicationPartsAssemblyInfo.cs
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.MvcApplicationPartsAssemblyInfo.cache

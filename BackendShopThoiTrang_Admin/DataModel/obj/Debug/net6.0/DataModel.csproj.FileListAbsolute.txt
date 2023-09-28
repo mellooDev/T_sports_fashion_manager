@@ -1,0 +1,11 @@
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\bin\Debug\net6.0\DataModel.deps.json
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\bin\Debug\net6.0\DataModel.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\bin\Debug\net6.0\DataModel.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\DataModel.GeneratedMSBuildEditorConfig.editorconfig
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\DataModel.AssemblyInfoInputs.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\DataModel.AssemblyInfo.cs
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\DataModel.csproj.CoreCompileInputs.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\DataModel.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\refint\DataModel.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\DataModel.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang\DataModel\obj\Debug\net6.0\ref\DataModel.dll
