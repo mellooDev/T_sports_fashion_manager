@@ -11,10 +11,10 @@ namespace BusinessLogicLayer
         {
             _res = res;
         }
-        public ImportModel GetImportbyId(string id)
-        {
-            return _res.GetImportbyId(id);
-        }
+        //public ImportModel GetImportbyId(string id)
+        //{
+        //    return _res.GetImportbyId(id);
+        //}
 
         public bool Create(ImportModel model)
         {
