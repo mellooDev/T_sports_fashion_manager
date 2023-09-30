@@ -21,14 +21,14 @@ namespace BusinessLogicLayer
             return _res.Create(model);
         }
 
-        public bool Update(ImportModel model)
-        {
-            return _res.Update(model);
-        }
+        //public bool Update(ImportModel model)
+        //{
+        //    return _res.Update(model);
+        //}
 
-        public bool Delete(string Id)
-        {
-            return _res.Delete(Id);
-        }
+        //public bool Delete(string Id)
+        //{
+        //    return _res.Delete(Id);
+        //}
     }
 }

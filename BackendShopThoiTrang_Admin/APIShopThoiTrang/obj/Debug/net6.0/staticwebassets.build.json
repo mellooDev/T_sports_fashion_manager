@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "IKN+rVV3aRlkaor57aLxvnTHeKLdy5KHLEr9IgqP2t8=",
-  "Source": "APIShopThoiTrang",
-  "BasePath": "_content/APIShopThoiTrang",
+  "Hash": "Cy7nL8rdAHD/f71THVT/cebSwQT+/VlVgavr32ztKHY=",
+  "Source": "APIShopThoiTrang_Admin",
+  "BasePath": "_content/APIShopThoiTrang_Admin",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

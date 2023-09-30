@@ -23,3 +23,12 @@ D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogi
 D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.dll
 D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\obj\Debug\net6.0\refint\BusinessLogicLayer.dll
 D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.deps.json
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\bin\Debug\net6.0\DataAccessLayer.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\bin\Debug\net6.0\DataModels.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\bin\Debug\net6.0\DataModels.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.csproj.CopyComplete
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\BusinessLogicLayer\obj\Debug\net6.0\ref\BusinessLogicLayer.dll

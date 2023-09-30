@@ -10,17 +10,17 @@ namespace Api.BanHang.Controllers
     public class ImportController : ControllerBase
     {
         private IImportBusiness _importBusiness;
-        public ImportController(IImportBusiness importBusiness) 
+        public ImportController(IImportBusiness importBusiness)
         {
             _importBusiness = importBusiness;
         }
 
-        [Route("get-by-id/{id}")]
-        [HttpGet]
-        public ImportModel GetImportbyId(string id)
-        {
-            return _importBusiness.GetImportbyId(id);
-        }
+        //[Route("get-by-id/{id}")]
+        //[HttpGet]
+        //public ImportModel GetImportbyId(string id)
+        //{
+        //    return _importBusiness.GetImportbyId(id);
+        //}
 
         [Route("create-import")]
         [HttpPost]
@@ -30,23 +30,23 @@ namespace Api.BanHang.Controllers
             return model;
         }
 
-        [Route("update-import")]
-        [HttpPost]
-        public BrandsModel UpdateBrand([FromBody] BrandsModel model)
-        {
-            _brandBusiness.Update(model);
-            return model;
-        }
+        //[Route("update-import")]
+        //[HttpPost]
+        //public BrandsModel UpdateBrand([FromBody] BrandsModel model)
+        //{
+        //    _brandBusiness.Update(model);
+        //    return model;
+        //}
 
-        [Route("delete-Khach")]
-        [HttpPost]
-        public IActionResult DeleteBrand([FromBody] Dictionary<string, object> formData)
-        {
-            string KhachHangID = "";
-            if (formData.Keys.Contains("brand_id") && !string.IsNullOrEmpty(Convert.ToString(formData["brand_id"]))) { KhachHangID = Convert.ToString(formData["brand_id"]); }
-            _brandBusiness.Delete(KhachHangID);
-            return Ok();
-        }
+        //[Route("delete-Khach")]
+        //[HttpPost]
+        //public IActionResult DeleteBrand([FromBody] Dictionary<string, object> formData)
+        //{
+        //    string KhachHangID = "";
+        //    if (formData.Keys.Contains("brand_id") && !string.IsNullOrEmpty(Convert.ToString(formData["brand_id"]))) { KhachHangID = Convert.ToString(formData["brand_id"]); }
+        //    _brandBusiness.Delete(KhachHangID);
+        //    return Ok();
+        //}
 
 
 
