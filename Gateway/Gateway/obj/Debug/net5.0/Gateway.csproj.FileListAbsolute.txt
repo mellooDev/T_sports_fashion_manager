@@ -1,0 +1,95 @@
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\appsettings.Development.json
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\appsettings.json
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\configuration.Development.json
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\configuration.Production.json
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.exe
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.deps.json
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.runtimeconfig.json
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.runtimeconfig.dev.json
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.pdb
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\FluentValidation.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Ocelot.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.csproj.AssemblyReference.cache
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.GeneratedMSBuildEditorConfig.editorconfig
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.AssemblyInfoInputs.cache
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.AssemblyInfo.cs
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.csproj.CoreCompileInputs.cache
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.MvcApplicationPartsAssemblyInfo.cs
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.MvcApplicationPartsAssemblyInfo.cache
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\scopedcss\bundle\Gateway.styles.css
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\staticwebassets\Gateway.StaticWebAssets.Manifest.cache
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.RazorTargetAssemblyInfo.cache
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.csproj.CopyComplete
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\refint\Gateway.dll
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.pdb
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.genruntimeconfig.cache
+D:\Teaching\Web API\Sinh vien\Demo\Gateway\Gateway\obj\Debug\net5.0\ref\Gateway.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\appsettings.Development.json
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\appsettings.json
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\configuration.Production.json
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\configuration.Development.json
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.exe
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.deps.json
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.runtimeconfig.json
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.runtimeconfig.dev.json
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Gateway.pdb
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\FluentValidation.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Ocelot.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.csproj.AssemblyReference.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.GeneratedMSBuildEditorConfig.editorconfig
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.AssemblyInfoInputs.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.AssemblyInfo.cs
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.csproj.CoreCompileInputs.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.MvcApplicationPartsAssemblyInfo.cs
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.MvcApplicationPartsAssemblyInfo.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\scopedcss\bundle\Gateway.styles.css
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\staticwebassets\Gateway.StaticWebAssets.Manifest.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\staticwebassets\Gateway.StaticWebAssets.Pack.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\staticwebassets\msbuild.Gateway.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\staticwebassets\msbuild.build.Gateway.props
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.Gateway.props
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.Gateway.props
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.RazorTargetAssemblyInfo.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.csproj.CopyComplete
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\refint\Gateway.dll
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.pdb
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\Gateway.genruntimeconfig.cache
+D:\Teaching\Demo\WebAPI\Demo\Gateway\Gateway\obj\Debug\net5.0\ref\Gateway.dll

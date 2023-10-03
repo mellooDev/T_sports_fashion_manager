@@ -7,52 +7,45 @@ namespace Api.BanHang.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class FeedbackController : ControllerBase
     {
-        private IBrandBusiness _brandBusiness;
-        public BrandController(IBrandBusiness brandBusiness) 
+        private IFeedbackBusiness _feedbackBusiness;
+        public FeedbackController(IFeedbackBusiness feedbackBusiness) 
         {
-            _brandBusiness = brandBusiness;
+            _feedbackBusiness = feedbackBusiness;
         }
 
         [Route("get-by-id/{id}")]
         [HttpGet]
-        public BrandsModel GetBrandbyId(string id)
+        public FeedbacksModel GetFeedbackbyId(string id)
         {
-            return _brandBusiness.GetBrandbyId(id);
-        }
-
-        [Route("get-all")]
-        [HttpGet]
-        public List<BrandsModel> GetAllBrands()
-        {
-            return _brandBusiness.GetAllBrands();
+            return _feedbackBusiness.GetFeedbackbyId(id);
         }
 
 
-        [Route("create-brand")]
+        [Route("create-feedback")]
         [HttpPost]
-        public BrandsModel CreateBrand([FromBody] BrandsModel model)
+        public FeedbacksModel CreateFeedback([FromBody] FeedbacksModel model)
         {
-            _brandBusiness.Create(model);
+            _feedbackBusiness.Create(model);
             return model;
         }
 
-        [Route("update-khach")]
+        [Route("update-feedback")]
         [HttpPost]
-        public BrandsModel UpdateBrand([FromBody] BrandsModel model)
+        public FeedbacksModel UpdateFeedback([FromBody] FeedbacksModel model)
         {
-            _brandBusiness.Update(model);
+            _feedbackBusiness.Update(model);
             return model;
         }
 
-        [Route("delete-Khach")]
+        [Route("delete-feedback")]
         [HttpPost]
-        public IActionResult DeleteBrand([FromBody] Dictionary<string, object> formData)
+        public IActionResult DeleteFeedback([FromBody] Dictionary<string, object> formData)
         {
-            string brand_id = "";
-            if (formData.Keys.Contains("brand_id") && !string.IsNullOrEmpty(Convert.ToString(formData["brand_id"]))) { brand_id = Convert.ToString(formData["brand_id"]); }
-            _brandBusiness.Delete(KhachHangID);
+            string feedback_id = "";
+            if (formData.Keys.Contains("feedback_id") && !string.IsNullOrEmpty(Convert.ToString(formData["feedback_id"]))) { feedback_id = Convert.ToString(formData["feedback_id"]); }
+            _feedbackBusiness.Delete(feedback_id);
             return Ok();
         }
 

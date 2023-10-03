@@ -7,52 +7,44 @@ namespace Api.BanHang.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class ShippingDetailsController : ControllerBase
     {
-        private IBrandBusiness _brandBusiness;
-        public BrandController(IBrandBusiness brandBusiness) 
+        private IShippingDetailsBusiness _shippingDetailsBusiness;
+        public ShippingDetailsController(IShippingDetailsBusiness shippingDetailsBusiness) 
         {
-            _brandBusiness = brandBusiness;
+            _shippingDetailsBusiness = shippingDetailsBusiness;
         }
 
         [Route("get-by-id/{id}")]
         [HttpGet]
-        public BrandsModel GetBrandbyId(string id)
+        public Shipping_detailsModel GetShippingbyId(string id)
         {
-            return _brandBusiness.GetBrandbyId(id);
+            return _shippingDetailsBusiness.GetShippingbyId(id);
         }
 
-        [Route("get-all")]
-        [HttpGet]
-        public List<BrandsModel> GetAllBrands()
-        {
-            return _brandBusiness.GetAllBrands();
-        }
-
-
-        [Route("create-brand")]
+        [Route("create-shippingDetails")]
         [HttpPost]
-        public BrandsModel CreateBrand([FromBody] BrandsModel model)
+        public Shipping_detailsModel CreateShipping([FromBody] Shipping_detailsModel model)
         {
-            _brandBusiness.Create(model);
+            _shippingDetailsBusiness.Create(model);
             return model;
         }
 
-        [Route("update-khach")]
+        [Route("update-shippingDetails")]
         [HttpPost]
-        public BrandsModel UpdateBrand([FromBody] BrandsModel model)
+        public Shipping_detailsModel UpdateShipping([FromBody] Shipping_detailsModel model)
         {
-            _brandBusiness.Update(model);
+            _shippingDetailsBusiness.Update(model);
             return model;
         }
 
-        [Route("delete-Khach")]
+        [Route("delete-shippingDetails")]
         [HttpPost]
-        public IActionResult DeleteBrand([FromBody] Dictionary<string, object> formData)
+        public IActionResult DeleteShipping([FromBody] Dictionary<string, object> formData)
         {
-            string brand_id = "";
-            if (formData.Keys.Contains("brand_id") && !string.IsNullOrEmpty(Convert.ToString(formData["brand_id"]))) { brand_id = Convert.ToString(formData["brand_id"]); }
-            _brandBusiness.Delete(KhachHangID);
+            string detail_id = "";
+            if (formData.Keys.Contains("detail_id") && !string.IsNullOrEmpty(Convert.ToString(formData["detail_id"]))) { detail_id = Convert.ToString(formData["detail_id"]); }
+            _shippingDetailsBusiness.Delete(detail_id);
             return Ok();
         }
 
