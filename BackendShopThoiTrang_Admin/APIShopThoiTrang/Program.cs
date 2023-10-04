@@ -18,8 +18,17 @@ builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductBusiness, ProductBusiness>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<ICustomerBusiness, CustomerBusiness>();
-//builder.Services.AddTransient<IImportRepository, ImportRepository>();
-//builder.Services.AddTransient<IImportBusiness, ImportBusiness>();
+builder.Services.AddTransient<IImportRepository, ImportRepository>();
+builder.Services.AddTransient<IImportBusiness, ImportBusiness>();
+builder.Services.AddTransient<IAdminRepository, AdminRepository>();
+builder.Services.AddTransient<IAdminBusiness, AdminBusiness>();
+builder.Services.AddTransient<IShippingDetailsRepository, ShippingDetailsRepository>();
+builder.Services.AddTransient<IShippingDetailsBusiness, ShippingDetailsBusiness>();
+builder.Services.AddTransient<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddTransient<IFeedbackBusiness, FeedbackBusiness>();
+
+
+
 
 // Add services to the container.
 

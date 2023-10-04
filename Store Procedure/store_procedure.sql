@@ -384,3 +384,204 @@ AS
                 END;
         SELECT '';
     END;
+go
+
+--login account admin
+create proc sp_login(@username nvarchar(500), @password varchar(256))
+as
+begin
+	select * from Admin
+	where username = @username and password = @password
+end
+go
+
+--Shipping Details
+--get shipping detail by id
+create proc sp_get_shipping_detail_by_id
+(
+	@detail_id int
+)
+as
+begin
+	select * from Shipping_details
+	where detail_id = @detail_id
+end
+go
+
+--create shipping detail
+create proc sp_create_shipping_detail
+(
+	@consignee_name nvarchar(255),
+	@delivery_address nvarchar(255),
+	@phone_number varchar(20),
+	@shipping_note nvarchar(350),
+	@shipping_method int
+)
+as
+begin
+	insert into Shipping_details(consignee_name, delivery_address, phone_number, shipping_note, shipping_method)
+	values(@consignee_name, @delivery_address, @phone_number, @shipping_note, @shipping_method)
+end
+go
+
+--update shipping detail
+create proc sp_update_shipping_detail
+(
+	@detail_id int,
+	@consignee_name nvarchar(255),
+	@delivery_address nvarchar(255),
+	@phone_number varchar(20),
+	@shipping_note nvarchar(350),
+	@shipping_method int
+)
+as
+begin
+	update Shipping_details
+	set
+		consignee_name = CASE WHEN @consignee_name IS NOT NULL AND @consignee_name <> 'null' AND @consignee_name <> 'string' THEN @consignee_name ELSE consignee_name END,
+		delivery_address = CASE WHEN @delivery_address IS NOT NULL AND @delivery_address <> 'null' AND @delivery_address <> 'string' THEN @delivery_address ELSE delivery_address END,
+		phone_number = CASE WHEN @phone_number IS NOT NULL AND @phone_number <> 'null' AND @phone_number <> 'string' AND @phone_number NOT LIKE '%[^0-9]%' THEN @phone_number ELSE phone_number END,
+		shipping_note = CASE WHEN @shipping_note IS NOT NULL AND @shipping_note <> 'null' AND @shipping_note <> 'string' THEN @shipping_note ELSE shipping_note END,
+		shipping_method = CASE WHEN @shipping_method IS NOT NULL AND @shipping_method <> 0 THEN @shipping_method ELSE shipping_method END
+	where detail_id = @detail_id
+end
+go
+
+--delete shipping details
+create proc sp_delete_shipping_detail
+(
+	@detail_id int
+)
+as
+begin
+	delete Shipping_details
+	where detail_id = @detail_id
+end
+go
+
+--feedback
+--get feedback by id
+create proc sp_get_feedback_by_id
+(
+	@feedback_id int
+)
+as
+begin
+	select * from Feedbacks
+	where feedback_id = @feedback_id
+end
+go
+
+--create feedback
+create proc sp_create_feedback
+(
+	@first_name nvarchar(50),
+	@last_name nvarchar(50),
+	@email varchar(150),
+	@phone_number varchar(20),
+	@subject_name nvarchar(100),
+	@feedback_content nvarchar(500)
+)
+as
+begin
+	insert into Feedbacks(first_name, last_name, email, phone_number, subject_name, feedback_content)
+	values(@first_name, @last_name, @email, @phone_number, @subject_name, @feedback_content)
+end
+go
+
+--update feedback
+create proc sp_update_feedback
+(
+	@feedback_id int,
+	@first_name nvarchar(50),
+	@last_name nvarchar(50),
+	@email varchar(150),
+	@phone_number varchar(20),
+	@subject_name nvarchar(100),
+	@feedback_content nvarchar(500)
+)
+as
+begin
+	update Feedbacks
+	set
+		first_name = CASE WHEN @first_name IS NOT NULL AND @first_name <> 'null' AND @first_name <> 'string' THEN @first_name ELSE first_name END,
+		last_name = CASE WHEN @last_name IS NOT NULL AND @last_name <> 'null' AND @last_name <> 'string' THEN @last_name ELSE last_name END,
+		email = CASE WHEN @email IS NOT NULL AND @email <> 'null' AND @email <> 'string' THEN @email ELSE email END,
+		phone_number = CASE WHEN @phone_number IS NOT NULL AND @phone_number <> 'null' AND @phone_number <> 'string' AND @phone_number NOT LIKE '%[^0-9]%' THEN @phone_number ELSE phone_number END,
+		subject_name = CASE WHEN @subject_name IS NOT NULL AND @subject_name <> 'null' AND @subject_name <> 'string' THEN @subject_name ELSE subject_name END,
+		feedback_content = CASE WHEN @feedback_content IS NOT NULL AND @feedback_content <> 'null' AND @feedback_content <> 'string'  THEN @feedback_content ELSE feedback_content END
+	where feedback_id = @feedback_id
+end
+go
+
+--delete feedback
+create proc sp_delete_feedback
+(
+	@feedback_id int
+)
+as
+begin
+	delete Feedbacks
+	where feedback_id = @feedback_id
+end
+go
+
+--order
+--create order
+create proc [dbo].[sp_create_order]
+(@customer_id       int, 
+ @detail_id       int,
+ @note        nvarchar(500),
+ @total_money int,
+ @status    int,
+ @list_json_order_details NVARCHAR(MAX)
+)
+AS
+    BEGIN
+		DECLARE @order_id INT;
+        INSERT INTO Order_invoices
+                (customer_id, 
+				 detail_id,
+				 note,
+                 total_money,
+				 status
+                )
+                VALUES
+                (@customer_id, 
+				 @detail_id,
+				 @note,
+                 @total_money,
+				 @status
+				 );
+				SET @order_id = (select scope_identity())
+				declare @total_money_order int;
+				set @total_money_order = 0;
+                IF(@list_json_order_details IS NOT NULL)
+                    BEGIN
+                        INSERT INTO Order_details
+                        (order_id, 
+                         product_id, 
+                         quantity,
+						 voucher_id,
+						 fee_id,
+						 total_money
+                        )
+                               SELECT @order_id, 
+                                      JSON_VALUE(l.value, '$.product_id'), 
+                                      JSON_VALUE(l.value, '$.quantity'), 
+                                      JSON_VALUE(l.value, '$.voucher_id'),
+                                      JSON_VALUE(l.value, '$.fee_id'),
+                                      JSON_VALUE(l.value, '$.total_money'),    
+                                      cast(JSON_VALUE(l.value, '$.import_price') as int) * cast(JSON_VALUE(l.value, '$.quantity') as int)
+                               FROM OPENJSON(@list_json_order_details) AS l;
+						select @total_money_order = SUM(total_money)
+						from Order_details
+						where order_id = @order_id
+
+						update Order_invoices
+						set total_money = @total_money_order
+						where order_id = @order_id
+                END;
+        SELECT '';
+    END;
+go

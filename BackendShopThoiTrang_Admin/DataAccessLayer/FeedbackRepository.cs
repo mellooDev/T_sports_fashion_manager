@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Helper;
 using DataAccessLayer.Helper.Interfaces;
 using DataModel;
+using System.Reflection;
 
 namespace DataAccessLayer
 {
@@ -16,7 +17,7 @@ namespace DataAccessLayer
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_brand_by_id",
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_feedback_by_id",
                      "@brand_id", id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
@@ -34,8 +35,13 @@ namespace DataAccessLayer
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create_brand",
-                    "@brand_name", model.brand_name);
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create_feedback",
+                    "@first_name", model.first_name,
+                    "@last_name", model.last_name,
+                    "@email", model.email,
+                    "@phone_number", model.phone_number,
+                    "@subject_name", model.subject_name,
+                    "@feedback_content", model.feedback_content);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -53,9 +59,14 @@ namespace DataAccessLayer
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_update_brand",
-                    "@brand_id", model.brand_id,
-                    "@brand_name", model.brand_name);
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_update_feedback",
+                    "@feedback_id", model.feedback_id,
+                    "@first_name", model.first_name,
+                    "@last_name", model.last_name,
+                    "@email", model.email,
+                    "@phone_number", model.phone_number,
+                    "@subject_name", model.subject_name,
+                    "@feedback_content", model.feedback_content);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -73,8 +84,8 @@ namespace DataAccessLayer
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_delete_brand",
-                "@brand_id", id);
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_delete_feedback",
+                "@feedback_id", id);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);

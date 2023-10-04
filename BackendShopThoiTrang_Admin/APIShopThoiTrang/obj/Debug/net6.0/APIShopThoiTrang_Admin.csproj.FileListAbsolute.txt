@@ -43,3 +43,11 @@ D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiT
 D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.csproj.CopyComplete
 D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\APIShopThoiTrang_Admin.genruntimeconfig.cache
 D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\obj\Debug\net6.0\ref\APIShopThoiTrang_Admin.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_Admin\APIShopThoiTrang\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

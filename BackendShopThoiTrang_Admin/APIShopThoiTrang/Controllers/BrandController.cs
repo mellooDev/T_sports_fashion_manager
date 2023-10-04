@@ -52,7 +52,7 @@ namespace Api.BanHang.Controllers
         {
             string brand_id = "";
             if (formData.Keys.Contains("brand_id") && !string.IsNullOrEmpty(Convert.ToString(formData["brand_id"]))) { brand_id = Convert.ToString(formData["brand_id"]); }
-            _brandBusiness.Delete(KhachHangID);
+            _brandBusiness.Delete(brand_id);
             return Ok();
         }
 

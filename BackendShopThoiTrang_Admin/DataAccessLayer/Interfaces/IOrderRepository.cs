@@ -1,23 +1,21 @@
-﻿//using DataModel;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using DataModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace DataAccessLayer
-//{
-//    public partial interface IBrandRepository
-//    {
-//        BrandsModel GetBrandbyId(string id);
+namespace DataAccessLayer
+{
+    public partial interface IOrderRepository
+    {
+        //Order_invoicesModel GetOrderbyId(string id);
 
-//        List<BrandsModel> GetAllBrands();
+        bool Create(Order_invoicesModel model);
 
-//        bool Create(BrandsModel model);
+        //bool Update(Order_invoicesModel model);
 
-//        bool Update(BrandsModel model);
+        //bool Delete(string Id);
 
-//        bool Delete(string Id);
-
-//    }
-//}
+    }
+}
