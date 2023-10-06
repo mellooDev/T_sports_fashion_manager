@@ -1,4 +1,4 @@
---Roles
+﻿--Roles
 --get_all_roles
 create proc sp_get_all_role
 as
@@ -528,60 +528,115 @@ go
 
 --order
 --create order
-create proc [dbo].[sp_create_order]
-(@customer_id       int, 
- @detail_id       int,
- @note        nvarchar(500),
- @total_money int,
- @status    int,
- @list_json_order_details NVARCHAR(MAX)
+CREATE PROC [dbo].[sp_create_order]
+(
+    @customer_id INT,
+    @detail_id INT,
+    @note NVARCHAR(500),
+    @status INT,
+    @list_json_order_details NVARCHAR(MAX)
 )
 AS
-    BEGIN
-		DECLARE @order_id INT;
-        INSERT INTO Order_invoices
-                (customer_id, 
-				 detail_id,
-				 note,
-                 total_money,
-				 status
-                )
-                VALUES
-                (@customer_id, 
-				 @detail_id,
-				 @note,
-                 @total_money,
-				 @status
-				 );
-				SET @order_id = (select scope_identity())
-				declare @total_money_order int;
-				set @total_money_order = 0;
-                IF(@list_json_order_details IS NOT NULL)
-                    BEGIN
-                        INSERT INTO Order_details
-                        (order_id, 
-                         product_id, 
-                         quantity,
-						 voucher_id,
-						 fee_id,
-						 total_money
-                        )
-                               SELECT @order_id, 
-                                      JSON_VALUE(l.value, '$.product_id'), 
-                                      JSON_VALUE(l.value, '$.quantity'), 
-                                      JSON_VALUE(l.value, '$.voucher_id'),
-                                      JSON_VALUE(l.value, '$.fee_id'),
-                                      JSON_VALUE(l.value, '$.total_money'),    
-                                      cast(JSON_VALUE(l.value, '$.import_price') as int) * cast(JSON_VALUE(l.value, '$.quantity') as int)
-                               FROM OPENJSON(@list_json_order_details) AS l;
-						select @total_money_order = SUM(total_money)
-						from Order_details
-						where order_id = @order_id
+BEGIN
+    DECLARE @order_id INT;
+    
+    -- Thêm hóa đơn mới
+    INSERT INTO Order_invoices
+    (customer_id, detail_id, note, status)
+    VALUES
+    (@customer_id, @detail_id, @note, @status);
+    
+    SET @order_id = SCOPE_IDENTITY();
+    
+    -- Bảng tạm để tính tổng tiền
+    CREATE TABLE #TempOrderDetails
+    (
+        product_id INT,
+        quantity INT,
+        voucher_id INT,
+        fee_id INT,
+        total_money INT
+    );
 
-						update Order_invoices
-						set total_money = @total_money_order
-						where order_id = @order_id
-                END;
-        SELECT '';
+    -- Thêm chi tiết hóa đơn vào bảng tạm
+    IF (@list_json_order_details IS NOT NULL)
+    BEGIN
+        INSERT INTO #TempOrderDetails (product_id, quantity, voucher_id, fee_id, total_money)
+        SELECT
+            JSON_VALUE(l.value, '$.product_id'),
+            JSON_VALUE(l.value, '$.quantity'),
+            JSON_VALUE(l.value, '$.voucher_id'),
+            JSON_VALUE(l.value, '$.fee_id'),
+            CAST(JSON_VALUE(l.value, '$.total_money') AS INT)
+        FROM OPENJSON(@list_json_order_details) AS l;
+        
+        -- Cập nhật tổng tiền trong bảng tạm
+        UPDATE #TempOrderDetails
+        SET total_money = (SELECT 
+                                (P.price * TD.quantity + ISNULL(FS.fee_value, 0) - ISNULL(V.voucher_value, 0))
+                            FROM Products AS P
+                            INNER JOIN #TempOrderDetails AS TD ON P.product_id = TD.product_id
+                            LEFT JOIN Fee_shipping AS FS ON TD.fee_id = FS.fee_id
+                            LEFT JOIN Vouchers AS V ON TD.voucher_id = V.voucher_id
+                            WHERE TD.product_id = P.product_id);
+        
+        -- Thêm chi tiết hóa đơn từ bảng tạm vào bảng Order_details
+        INSERT INTO Order_details (order_id, product_id, quantity, voucher_id, fee_id, total_money)
+        SELECT @order_id, product_id, quantity, voucher_id, fee_id, total_money FROM #TempOrderDetails;
+        
+        -- Tính tổng tiền cho hóa đơn và cập nhật vào Order_invoices
+        DECLARE @total_money_order INT;
+        SET @total_money_order = (SELECT SUM(total_money) FROM #TempOrderDetails);
+        
+        UPDATE Order_invoices
+        SET total_money = @total_money_order
+        WHERE order_id = @order_id;
+        
+        -- Xóa bảng tạm
+        DROP TABLE #TempOrderDetails;
     END;
+    
+    SELECT '';
+END;
 go
+
+--create location
+CREATE PROCEDURE [dbo].[sp_create_location]
+(
+    @list_json_location NVARCHAR(MAX)
+)
+AS
+BEGIN
+    -- Tạo bảng tạm thời để lưu dữ liệu JSON
+    CREATE TABLE #TempLocationData
+    (
+        province_name NVARCHAR(100),
+        district_name NVARCHAR(100),
+        village_name NVARCHAR(100)
+    )
+
+    -- Chuyển dữ liệu JSON vào bảng tạm thời
+    INSERT INTO #TempLocationData (province_name, district_name, village_name)
+    SELECT
+        JSON_VALUE(value, '$.province_name'),
+        JSON_VALUE(value, '$.district_name'),
+        JSON_VALUE(value, '$.village_name')
+    FROM OPENJSON(@location_data)
+
+    -- Thêm các bản ghi vào bảng Provinces, Districts và Villages từ bảng tạm thời
+    INSERT INTO Provinces (province_name)
+    SELECT province_name FROM #TempLocationData
+
+    INSERT INTO Districts (district_name, province_id)
+    SELECT district_name, SCOPE_IDENTITY()
+    FROM #TempLocationData
+
+    INSERT INTO Villages (village_name, district_id)
+    SELECT village_name, SCOPE_IDENTITY()
+    FROM #TempLocationData
+
+    -- Xóa bảng tạm thời
+    DROP TABLE #TempLocationData
+
+    SELECT '';
+END;
