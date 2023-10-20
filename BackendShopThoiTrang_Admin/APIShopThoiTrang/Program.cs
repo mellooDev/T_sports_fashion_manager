@@ -20,7 +20,7 @@ builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<ICustomerBusiness, CustomerBusiness>();
 builder.Services.AddTransient<IImportRepository, ImportRepository>();
 builder.Services.AddTransient<IImportBusiness, ImportBusiness>();
-builder.Services.AddTransient<IAdminRepository, AdminRepository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<IAdminBusiness, AdminBusiness>();
 builder.Services.AddTransient<IShippingDetailsRepository, ShippingDetailsRepository>();
 builder.Services.AddTransient<IShippingDetailsBusiness, ShippingDetailsBusiness>();

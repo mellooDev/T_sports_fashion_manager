@@ -9,6 +9,6 @@ namespace BusinessLogicLayer
 {
     public partial interface IAdminBusiness
     {
-        AdminsModel Login(string username, string password);
+        AccountModel Login(string username, string password);
     }
 }

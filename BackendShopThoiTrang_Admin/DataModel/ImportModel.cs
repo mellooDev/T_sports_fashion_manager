@@ -6,7 +6,7 @@
 
         public int category_id { get; set; }
 
-        public DateTime import_date { get; set; }
+        public DateTime? import_date { get; set; }
 
         public int total_money { get; set; }
 

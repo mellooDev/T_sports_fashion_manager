@@ -14,6 +14,8 @@
 
         public string subject_name { get; set; }
 
+        public int product_id { get; set; }
+
         public string feedback_content { get; set; }
 
     }

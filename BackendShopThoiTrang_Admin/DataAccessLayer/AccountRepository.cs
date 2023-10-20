@@ -4,15 +4,15 @@ using DataModel;
 
 namespace DataAccessLayer
 {
-    public class AdminRepository : IAdminRepository
+    public class AccountRepository : IAccountRepository
     {
         private IDatabaseHelper _dbHelper;
-        public AdminRepository(IDatabaseHelper dbHelper)
+        public AccountRepository(IDatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper;
         }
 
-        public AdminsModel Login(string username, string password)
+        public AccountModel Login(string username, string password)
         {
             string msgError = "";
             try
@@ -23,7 +23,7 @@ namespace DataAccessLayer
                      );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<AdminsModel>().FirstOrDefault();
+                return dt.ConvertTo<AccountModel>().FirstOrDefault();
             }
             catch (Exception ex)
             {

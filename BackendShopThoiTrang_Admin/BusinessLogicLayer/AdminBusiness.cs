@@ -12,16 +12,16 @@ namespace BusinessLogicLayer
 {
     public class AdminBusiness : IAdminBusiness
     {
-        private IAdminRepository _res;
+        private IAccountRepository _res;
         private string secret;
-        public AdminBusiness(IAdminRepository res, IConfiguration configuration)
+        public AdminBusiness(IAccountRepository res, IConfiguration configuration)
         {
             _res = res;
             secret = configuration["AppSettings:Secret"];
 
         }
 
-        public AdminsModel Login(string username, string password)
+        public AccountModel Login(string username, string password)
         {
             var admin_account = _res.Login(username, password);
             if (admin_account == null)

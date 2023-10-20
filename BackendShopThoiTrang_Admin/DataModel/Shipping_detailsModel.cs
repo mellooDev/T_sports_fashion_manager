@@ -2,7 +2,7 @@
 {
     public class Shipping_detailsModel
     {
-        public int detail_id { get; set; }
+        public int shippingDetail_id { get; set; }
 
         public string consignee_name { get; set; }
 
