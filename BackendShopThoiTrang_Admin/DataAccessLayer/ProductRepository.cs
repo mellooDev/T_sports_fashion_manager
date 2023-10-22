@@ -53,12 +53,11 @@ namespace DataAccessLayer
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create_product",
                     "@product_name", model.product_name,
+                    "@description", model.description,
                     "@price", model.price,
                     "@discount", model.discount,
                     "@image_link", model.image_link,
-                    "@description", model.description,
                     "@product_quantity", model.product_quantity,
-                    "@created_date", model.created_date,
                     "@updated_date", model.updated_date,
                     "@category_id", model.category_id,
                     "@brand_id", model.brand_id);

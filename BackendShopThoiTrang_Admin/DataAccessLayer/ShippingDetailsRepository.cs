@@ -59,7 +59,7 @@ namespace DataAccessLayer
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_update_shipping_detail",
-                    "@detail_id", model.detail_id,
+                    "@shippingDetail_id", model.shippingDetail_id,
                     "@consignee_name", model.consignee_name,
                     "@delivery_address", model.delivery_address,
                     "@phone_number", model.phone_number,

@@ -8,10 +8,10 @@ namespace Api.BanHang.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class AccountController : ControllerBase
     {
-        private IAdminBusiness _adminBusiness;
-        public AdminController(IAdminBusiness adminBusiness) 
+        private IAccountBusiness _adminBusiness;
+        public AccountController(IAccountBusiness adminBusiness) 
         {
             _adminBusiness = adminBusiness;
         }
@@ -20,10 +20,10 @@ namespace Api.BanHang.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] AuthenticateModel model)
         {
-            var admin_account = _adminBusiness.Login(model.Username, model.Password);
-            if (admin_account == null)
+            var account = _adminBusiness.Login(model.Username, model.Password);
+            if (account == null)
                 return BadRequest(new { message = "Tài khoản hoặc mật khẩu không đúng!" });
-            return Ok(new { username = admin_account.username, email = admin_account.email, address = admin_account.address, token = admin_account.token });
+            return Ok(new { username = account.username, email = account.email, address = account.address, role = account.role_id, token = account.token });
         }
     }
 }

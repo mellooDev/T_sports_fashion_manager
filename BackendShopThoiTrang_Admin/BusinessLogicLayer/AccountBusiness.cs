@@ -10,11 +10,11 @@ using System.Text;
 
 namespace BusinessLogicLayer
 {
-    public class AdminBusiness : IAdminBusiness
+    public class AccountBusiness : IAccountBusiness
     {
         private IAccountRepository _res;
         private string secret;
-        public AdminBusiness(IAccountRepository res, IConfiguration configuration)
+        public AccountBusiness(IAccountRepository res, IConfiguration configuration)
         {
             _res = res;
             secret = configuration["AppSettings:Secret"];
@@ -34,7 +34,8 @@ namespace BusinessLogicLayer
                 {
                     new Claim(ClaimTypes.Name, admin_account.username.ToString()),
                     new Claim(ClaimTypes.Email, admin_account.email),
-                    new Claim(ClaimTypes.StreetAddress, admin_account.address.ToString())
+                    new Claim(ClaimTypes.StreetAddress, admin_account.address.ToString()),
+                    new Claim(ClaimTypes.Role, admin_account.role_id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128CbcHmacSha256)

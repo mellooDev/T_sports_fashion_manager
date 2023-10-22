@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DataModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
@@ -15,6 +16,7 @@ namespace Api.BanHang.Controllers
             _brandBusiness = brandBusiness;
         }
 
+        [Authorize(Roles = "2")]
         [Route("get-by-id/{id}")]
         [HttpGet]
         public BrandsModel GetBrandbyId(string id)

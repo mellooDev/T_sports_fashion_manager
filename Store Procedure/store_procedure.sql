@@ -7,6 +7,7 @@ begin
 end
 go
 
+
 --create role
 create proc sp_create_role
 (
@@ -134,16 +135,12 @@ go
 --create category
 create proc sp_create_category
 (
-	@category_id int,
     @category_name nvarchar(350)
 )
 as
 begin
-	if not exists (select 1 from Categories where category_id = @category_id)
-	begin
-		insert into Categories(category_name)
-		values(@category_name)
-	end
+	insert into Categories(category_name)
+	values(@category_name)
 end
 go
 
@@ -293,6 +290,20 @@ begin
 end
 go
 
+--get product by brand
+create proc sp_get_product_by_brand
+(
+	@brand_name nvarchar(350)
+)
+as
+begin
+	select * from Products p inner join Brands b
+	on p.brand_id = b.brand_id
+	where brand_name = @brand_name
+end
+go
+
+
 --create product
 --get product by id
 create proc sp_create_product
@@ -309,8 +320,8 @@ create proc sp_create_product
 )
 as
 begin
-	insert into Products(product_name, price, discount, image_link, description, product_quantity, updated_date, category_id, brand_id)
-	values(@product_name, @price, @discount, @image_link, @description, @product_quantity, @updated_date, @category_id, @brand_id)
+	insert into Products(product_name, description, price, discount, image_link, product_quantity, updated_date, category_id, brand_id)
+	values(@product_name, @description, @price, @discount, @image_link, @product_quantity, @updated_date, @category_id, @brand_id)
 end
 go
 

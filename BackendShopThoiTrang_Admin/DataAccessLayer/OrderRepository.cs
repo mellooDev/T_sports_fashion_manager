@@ -34,10 +34,10 @@ namespace DataAccessLayer
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create_import",
-                "@category_id", model.category_id,
-                "@total_money", model.total_money,
-                "@list_json_import_details", model.list_json_order_details != null ? MessageConvert.SerializeObject(model.list_json_order_details) : null);
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create_order",
+                "@account_id", model.account_id,
+                "@shippingDetail_id", model.shippingDetail_id,
+                "@list_json_order_details", model.list_json_order_details != null ? MessageConvert.SerializeObject(model.list_json_order_details) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);

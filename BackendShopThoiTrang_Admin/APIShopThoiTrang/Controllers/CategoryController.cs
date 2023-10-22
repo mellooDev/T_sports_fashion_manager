@@ -1,10 +1,12 @@
 ﻿using BusinessLogicLayer;
 using DataModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
 namespace Api.BanHang.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -22,6 +24,7 @@ namespace Api.BanHang.Controllers
             return _categoryBusiness.GetCategorybyID(id);
         }
 
+        [AllowAnonymous]
         [Route("get-all")]
         [HttpGet]
         public List<CategoriesModel> GetAllCategories()

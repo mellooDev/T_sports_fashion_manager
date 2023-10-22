@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer
 {
-    public partial interface IAdminBusiness
+    public partial interface IAccountBusiness
     {
         AccountModel Login(string username, string password);
     }
