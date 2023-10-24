@@ -40,7 +40,7 @@ namespace Api.BanHang.Controllers
             return model;
         }
 
-        [Route("update-khach")]
+        [Route("update-brand")]
         [HttpPost]
         public BrandsModel UpdateBrand([FromBody] BrandsModel model)
         {
@@ -48,7 +48,7 @@ namespace Api.BanHang.Controllers
             return model;
         }
 
-        [Route("delete-Khach")]
+        [Route("delete-brand")]
         [HttpPost]
         public IActionResult DeleteBrand([FromBody] Dictionary<string, object> formData)
         {

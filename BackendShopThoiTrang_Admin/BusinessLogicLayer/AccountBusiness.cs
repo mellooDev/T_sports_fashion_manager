@@ -37,7 +37,7 @@ namespace BusinessLogicLayer
                     new Claim(ClaimTypes.StreetAddress, admin_account.address.ToString()),
                     new Claim(ClaimTypes.Role, admin_account.role_id.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddMinutes(20),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128CbcHmacSha256)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

@@ -120,5 +120,28 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
+
+        public List<ProductsModel> Search(int pageIndex, int pageSize, out long total, string product_name, int fr_price, int to_price)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_thong_ke_khach",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
+                    "@product_name", product_name,
+                    "@fr_price", fr_price,
+                    "@to_price", to_price);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<ProductsModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

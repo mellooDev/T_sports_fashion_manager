@@ -35,5 +35,10 @@ namespace BusinessLogicLayer
         {
             return _res.Delete(Id);
         }
+
+        public List<ProductsModel> Search(int pageIndex, int pageSize, out long total, string product_name, int fr_price, int to_price)
+        {
+            return _res.Search(pageIndex, pageSize, out total, product_name, fr_price, to_price);
+        }
     }
 }
