@@ -135,7 +135,7 @@ namespace Api.BanHang.Controllers
             {
                 var page = int.Parse(formData["page"].ToString());
                 var pageSize = int.Parse(formData["pageSize"].ToString());
-                string product_name = "";
+                string product_name = ""; 
                 if (formData.Keys.Contains("product_name") && !string.IsNullOrEmpty(Convert.ToString(formData["product_name"]))) { product_name = Convert.ToString(formData["product_name"]); }
                 int fr_price = formData.ContainsKey("fr_price") && int.TryParse(formData["fr_price"].ToString(), out var fr_priceValue) ? fr_priceValue : 0;
                 int to_frice = formData.ContainsKey("to_frice") && int.TryParse(formData["to_frice"].ToString(), out var to_priceValue) ? to_priceValue : 0;
