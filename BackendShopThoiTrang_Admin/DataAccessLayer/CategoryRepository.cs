@@ -28,6 +28,23 @@ namespace DataAccessLayer
             }
         }
 
+        public CategoriesModel GetProductByCategoryName(string name)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_product_by_cate",
+                     "@category_name", name);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<CategoriesModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<CategoriesModel> GetAllCategories()
         {
             string msgError = "";

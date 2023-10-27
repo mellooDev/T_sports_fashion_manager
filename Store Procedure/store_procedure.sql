@@ -124,6 +124,24 @@ begin
 end
 go
 
+--get all product by category
+create proc sp_get_product_by_cate
+(
+	@category_name nvarchar(350)
+)
+as
+begin
+	select c.*,
+		(
+			select p.*
+			from Products as p
+			where p.category_id = c.category_id FOR JSON PATH
+		) as list_json_product_by_cate
+		from Categories as c
+		where c.category_name = @category_name
+end
+go
+
 --get all category
 create proc sp_get_all_category
 as
@@ -290,16 +308,21 @@ begin
 end
 go
 
---get product by brand
+--get by brand
 create proc sp_get_product_by_brand
 (
-	@brand_name nvarchar(350)
+	@brand_name nvarchar(100)
 )
 as
 begin
-	select * from Products p inner join Brands b
-	on p.brand_id = b.brand_id
-	where brand_name = @brand_name
+	select b.*,
+		(
+			select p.*
+			from Products as p
+			where p.brand_id = b.brand_id FOR JSON PATH
+		) as list_json_product
+		from Brands as b
+		where b.brand_name = @brand_name
 end
 go
 

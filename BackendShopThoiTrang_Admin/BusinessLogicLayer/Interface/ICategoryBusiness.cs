@@ -11,6 +11,8 @@ namespace BusinessLogicLayer
     {
         CategoriesModel GetCategorybyID(string id);
 
+        CategoriesModel GetProductByCategoryName(string name);
+
         List<CategoriesModel> GetAllCategories();
 
         bool Create(CategoriesModel model);

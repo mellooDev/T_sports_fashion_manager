@@ -28,6 +28,23 @@ namespace DataAccessLayer
             }
         }
 
+        public BrandsModel GetProductbyBrandName(string name)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_product_by_brand",
+                     "@brand_name", name);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<BrandsModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<BrandsModel> GetAllBrands()
         {
             string msgError = "";

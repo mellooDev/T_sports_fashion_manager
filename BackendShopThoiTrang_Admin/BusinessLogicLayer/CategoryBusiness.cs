@@ -16,6 +16,11 @@ namespace BusinessLogicLayer
             return _res.GetCategorybyID(id);
         }
 
+        public CategoriesModel GetProductByCategoryName(string name)
+        {
+            return _res.GetProductByCategoryName(name);
+        }
+
         public List<CategoriesModel> GetAllCategories()
         {
             return _res.GetAllCategories();

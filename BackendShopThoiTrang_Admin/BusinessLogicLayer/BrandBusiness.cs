@@ -16,6 +16,11 @@ namespace BusinessLogicLayer
             return _res.GetBrandbyId(id);
         }
 
+        public BrandsModel GetProductbyBrandName(string name)
+        {
+            return _res.GetProductbyBrandName(name);
+        }
+
         public List<BrandsModel> GetAllBrands()
         {
             return _res.GetAllBrands();

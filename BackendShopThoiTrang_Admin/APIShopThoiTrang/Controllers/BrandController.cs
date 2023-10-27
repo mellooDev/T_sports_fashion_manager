@@ -16,12 +16,19 @@ namespace Api.BanHang.Controllers
             _brandBusiness = brandBusiness;
         }
 
-        [Authorize(Roles = "2")]
+        //[Authorize(Roles = "2")]
         [Route("get-by-id/{id}")]
         [HttpGet]
         public BrandsModel GetBrandbyId(string id)
         {
             return _brandBusiness.GetBrandbyId(id);
+        }
+
+        [Route("get-prod-by-name/{name}")]
+        [HttpGet]
+        public BrandsModel GetProductbyBrandName(string name)
+        {
+            return _brandBusiness.GetProductbyBrandName(name);
         }
 
         [Route("get-all")]

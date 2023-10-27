@@ -6,7 +6,7 @@ using Model;
 
 namespace Api.BanHang.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -22,6 +22,13 @@ namespace Api.BanHang.Controllers
         public CategoriesModel GetCategorybyID(string id)
         {
             return _categoryBusiness.GetCategorybyID(id);
+        }
+
+        [Route("get-product-by-cate-name/{name}")]
+        [HttpGet]
+        public CategoriesModel GetProductByCategoryName(string name)
+        {
+            return _categoryBusiness.GetProductByCategoryName(name);
         }
 
         [AllowAnonymous]

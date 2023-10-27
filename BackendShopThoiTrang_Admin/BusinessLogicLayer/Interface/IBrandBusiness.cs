@@ -11,6 +11,8 @@ namespace BusinessLogicLayer
     {
         BrandsModel GetBrandbyId(string id);
 
+        BrandsModel GetProductbyBrandName(string name);
+
         List<BrandsModel> GetAllBrands();
 
         bool Create(BrandsModel model);
