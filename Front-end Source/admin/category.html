@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+	<!-- GG fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="assets/css/category.css">
+	<script src="assets/js/ajax.googleapis.com_ajax_libs_angularjs_1.6.9_angular.min.js"></script>
+	<script src="assets/js/ajax.googleapis.com_ajax_libs_jquery_3.6.4_jquery.min.js"></script>
+
+	<title>AdminHub</title>
+</head>
+<body ng-app="CategoryApp" ng-controller="CategoryCtrl">
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-cookie'></i>
+			<span class="text">MyFood</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="category.html">
+					<i class='bx bxs-dashboard' id="dashboard"></i>
+					<span class="text">Danh mục</span>
+				</a>
+			</li>
+			<li>
+				<a href="brand.html">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Thương hiệu</span>
+				</a>
+			</li>
+			<li>
+				<a href="product.html" id="product_menu">
+					<i class='bx bxs-dish'></i>
+					<span class="text">Sản phẩm</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bx-user' ></i>
+					<span class="text">Sản phẩm bán chạy</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group'></i>
+					<span class="text">Khách hàng</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-notepad'></i>
+					<span class="text">Hóa đơn nhập</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bx-info-circle' ></i>
+					<span class="text">Chi tiết hóa đơn nhập</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" id="product_sell">
+					<i class='bx bxs-notepad'></i>
+					<span class="text">Hóa đơn bán</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bx-info-circle' ></i>
+					<span class="text">Chi tiết hóa đơn bán</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Cài đặt</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Đăng xuất</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="image/follow_1.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="action-table">
+				<button class="add-product">
+					<i class="fa-solid fa-plus"></i>
+					Thêm danh mục
+				</button>
+				<button class="update-product">
+					<i class="fa-solid fa-pen-to-square"></i>
+					Sửa danh mục
+				</button>
+			</div>
+			<table id="table_product">
+				<tr>
+					<th class="stt_col">STT</th>
+					<th class="name_col">Tên danh mục</th>
+					<th class="other_col"></th>
+				</tr>
+				<tr ng-repeat="x in listDistributor" class="main_row">
+					<td class="table_main">{{x.category_id}}</td>
+					</td>
+					<td class="main_text">{{x.category_name}}</td>
+					<td>
+						<div class="button_col">
+							<div class="button btn_edit">
+								<i class="fa-solid fa-pencil"></i>
+							</div>
+							<div class="button btn_watch">
+								<i class="fa-solid fa-eye"></i>
+							</div>
+							<div class="button btn_delete">
+								<i class="fa-solid fa-trash-can"></i>
+							</div>
+						</div>
+					</td>
+				</tr>
+
+
+
+			</table>
+
+			
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="assets/js/category.js"></script>
+	<script src="assets/js/product.js"></script>
+	<script src="assets/js/global.js"></script>
+	<script>
+		var userAcc = JSON.parse(localStorage.getItem('user'))
+		if(!userAcc){
+			window.location.href='./login.html'
+		}
+	</script>
+</body>
+</html>
