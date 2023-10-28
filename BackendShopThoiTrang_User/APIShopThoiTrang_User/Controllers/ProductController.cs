@@ -6,6 +6,7 @@ using Model;
 
 namespace Api.BanHang.Controllers
 {
+    [Authorize(Roles = "2")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -20,109 +21,13 @@ namespace Api.BanHang.Controllers
             _env = env;
         }
 
-        //[Authorize(Roles = "2")]
-        [Route("get-by-id/{id}")]
-        [HttpGet]
-        public ProductsModel GetProductbyId(string id)
-        {
-            return _productBusiness.GetProductbyId(id);
-        }
+
 
         [Route("get-all")]
         [HttpGet]
         public List<ProductsModel> GetAllProducts()
         {
             return _productBusiness.GetAllProducts();
-        }
-
-
-        [Route("create-product")]
-        [HttpPost]
-        public ProductsModel CreateProduct([FromBody] ProductsModel model)
-        {
-            _productBusiness.Create(model);
-            return model;
-        }
-
-        [Route("update-product")]
-        [HttpPut]
-        public ProductsModel UpdateProduct([FromBody] ProductsModel model)
-        {
-            _productBusiness.Update(model);
-            return model;
-        }
-
-        [Route("delete-product")]
-        [HttpPost]
-        public IActionResult DeleteProduct([FromBody] Dictionary<string, object> formData)
-        {
-            string product_id = "";
-            if (formData.Keys.Contains("product_id") && !string.IsNullOrEmpty(Convert.ToString(formData["product_id"]))) { product_id = Convert.ToString(formData["product_id"]); }
-            _productBusiness.Delete(product_id);
-            return Ok();
-        }
-
-        [NonAction]
-        public string CreatePathFile(string RelativePathFileName)
-        {
-            try
-            {
-                string serverRootPathFolder = _path;
-                string fullPathFile = $@"{serverRootPathFolder}\{RelativePathFileName}";
-                string fullPathFolder = Path.GetDirectoryName(fullPathFile);
-                if (!Directory.Exists(fullPathFolder))
-                    Directory.CreateDirectory(fullPathFolder);
-                return fullPathFile;
-            }
-            catch (Exception ex)
-            {
-
-                return ex.Message;
-            }
-        }
-
-        [Route("upload")]
-        [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload(IFormFile file)
-        {
-            try
-            {
-                if (file.Length > 0)
-                {
-                    string filePath = $"upload/{file.FileName}";
-                    var fullPath = CreatePathFile(filePath);
-                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                    return Ok(new { filePath });
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Không tìm thấy");
-            }
-        }
-
-        [Route("download")]
-        [HttpPost]
-        public IActionResult DownloadData([FromBody] Dictionary<string, object> formData)
-        {
-            try
-            {
-                var webRoot = _env.ContentRootPath;
-                string exportPath = Path.Combine(webRoot + @"\Export\DM.xlsx");
-                var stream = new FileStream(exportPath, FileMode.Open, FileAccess.Read);
-                return File(stream, "application/octet-stream");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
 
