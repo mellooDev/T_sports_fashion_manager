@@ -1,0 +1,17 @@
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.deps.json
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\bin\Debug\net6.0\BusinessLogicLayer.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\bin\Debug\net6.0\DataAccessLayer.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\bin\Debug\net6.0\DataModels.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\bin\Debug\net6.0\DataModels.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.csproj.AssemblyReference.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfoInputs.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.AssemblyInfo.cs
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.csproj.CopyComplete
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\refint\BusinessLogicLayer.dll
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\BusinessLogicLayer.pdb
+D:\Workspace\Web API 125211\BaiTapLonAPI\BackendShopThoiTrang_User\BusinessLogicLayer\obj\Debug\net6.0\ref\BusinessLogicLayer.dll

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\APIShopThoiTrang_User.props" />
+</Project>

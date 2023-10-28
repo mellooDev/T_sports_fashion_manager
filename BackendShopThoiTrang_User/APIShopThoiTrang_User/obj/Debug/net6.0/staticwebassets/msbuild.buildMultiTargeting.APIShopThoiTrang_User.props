@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\APIShopThoiTrang_User.props" />
+</Project>
