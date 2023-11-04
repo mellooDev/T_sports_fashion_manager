@@ -48,7 +48,7 @@ namespace Api.BanHang.Controllers
         }
 
         [Route("update-brand")]
-        [HttpPost]
+        [HttpPut]
         public BrandsModel UpdateBrand([FromBody] BrandsModel model)
         {
             _brandBusiness.Update(model);
@@ -56,7 +56,7 @@ namespace Api.BanHang.Controllers
         }
 
         [Route("delete-brand")]
-        [HttpPost]
+        [HttpDelete]
         public IActionResult DeleteBrand([FromBody] Dictionary<string, object> formData)
         {
             string brand_id = "";

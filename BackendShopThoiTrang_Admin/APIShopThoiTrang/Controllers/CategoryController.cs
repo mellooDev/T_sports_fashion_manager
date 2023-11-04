@@ -49,7 +49,7 @@ namespace Api.BanHang.Controllers
         }
 
         [Route("update-category")]
-        [HttpPost]
+        [HttpPut]
         public CategoriesModel UpdateKhach([FromBody] CategoriesModel model)
         {
             _categoryBusiness.Update(model);
@@ -57,7 +57,7 @@ namespace Api.BanHang.Controllers
         }
 
         [Route("delete-category")]
-        [HttpPost]
+        [HttpDelete]
         public IActionResult DeleteKhach([FromBody] Dictionary<string, object> formData)
         {
             string KhachHangID = "";

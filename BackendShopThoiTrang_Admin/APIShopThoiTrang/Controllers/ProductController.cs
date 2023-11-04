@@ -53,7 +53,7 @@ namespace Api.BanHang.Controllers
         }
 
         [Route("delete-product")]
-        [HttpPost]
+        [HttpDelete]
         public IActionResult DeleteProduct([FromBody] Dictionary<string, object> formData)
         {
             string product_id = "";

@@ -392,7 +392,7 @@ end
 go
 
 --search product by name products or price range
-CREATE PROCEDURE [dbo].[sp_product_search] (@page_index  INT, 
+create PROCEDURE [dbo].[sp_product_search] (@page_index  INT, 
                                        @page_size   INT,
 									   @product_name nvarchar(500),
 									   @fr_price int,
