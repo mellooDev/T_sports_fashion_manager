@@ -53,7 +53,189 @@ begin
 end
 go
 
+--Accounts
+--get account by id
+create proc sp_get_account_by_id
+(
+	@account_id int
+)
+as
+begin
+	select * from Account
+	where account_id = @account_id
+end
+go
 
+--get account details
+CREATE PROC sp_get_account_detail
+(
+	@account_id INT
+)
+AS
+BEGIN
+	select *
+	from Account a inner join AccountDetails ad on a.account_id = ad.account_id
+	where a.account_id = @account_id
+END
+GO
+
+
+--get account by username
+create proc sp_get_account_by_username
+(
+	@username nvarchar(500)
+)
+as
+begin
+	select top 1 * from Account
+	where username = @username
+end
+go
+
+--login account
+create proc sp_login(@username nvarchar(500), @password varchar(256))
+as
+begin
+	select * from Account
+	where username = @username and password = @password
+end
+go
+
+--create account
+CREATE PROC sp_signup_account
+(
+	@username nvarchar(500),
+	@password varchar(256)
+)
+AS
+BEGIN
+	insert into Account(username, password)
+	VALUES(@username, @password)
+END
+GO
+
+--create account
+create proc sp_create_account
+(
+	@username nvarchar(500),
+	@password varchar(256),
+	@role_id int,
+	@list_json_account_details NVARCHAR(MAX)
+)
+as
+begin
+	DECLARE @account_id int;
+	INSERT into Account(
+		username,
+		password,
+		role_id
+	)
+	VALUES(@username, @password);
+	SET @account_id = (select SCOPE_IDENTITY())
+	IF(@list_json_account_details is not null)
+	BEGIN
+		INSERT into AccountDetails(
+			full_name,
+			address,
+			phone_number,
+			email,
+			gender
+		)
+			select @account_id,
+					JSON_VALUE(l.value, "$.full_name"),
+					JSON_VALUE(l.value, "$.address"),
+					JSON_VALUE(l.value, "$.phone_number"),
+					JSON_VALUE(l.value, "$.email")
+			from openjson(@list_json_account_details) as l;
+	END
+	SELECT '';
+end
+go
+
+--update customer
+create proc sp_update_account
+(
+	@account_id int,
+	@username nvarchar(500),
+	@password varchar(256),
+	@role_id int,
+	@list_json_account_details NVARCHAR(MAX)
+)
+as
+begin
+	update Account
+	set
+		username = @username,
+		password = @password,
+		role_id = @role_id
+	where account_id = @account_id
+
+	if(@list_json_account_details is not null)
+	BEGIN
+		select
+			JSON_VALUE(l.value, '$.accDetail_id') as accDetail_id,
+			JSON_VALUE(l.value, '$.account_id') as account_id,
+			JSON_VALUE(l.value, '$.full_name') as full_name,
+			JSON_VALUE(l.value, '$.address') as address,
+			JSON_VALUE(l.value, '$.phone_number') as phone_number,
+			JSON_VALUE(l.value, '$.gender') as gender,
+			JSON_VALUE(l.value, '$.status') as status
+			into #Results
+		from openjson(@list_json_account_details) as l;
+
+		--insert if status = 1
+		INSERT into AccountDetails(
+			account_id,
+			full_name,
+			address,
+			phone_number,
+			gender
+		)
+		SELECT 
+			@account_id,
+			r.full_name,
+			r.address,
+			r.phone_number,
+			r.gender
+		from #Results r
+		where r.status = '1'
+
+		--update if status = 2
+		UPDATE AccountDetails
+		SET
+			full_name = CASE WHEN r.full_name IS NOT NULL AND r.full_name <> 'null' AND r.full_name <> 'string' THEN r.full_name ELSE AccountDetails.full_name END,
+			address = CASE WHEN r.address IS NOT NULL AND r.address <> 'null' AND r.address <> 'string' THEN r.address ELSE AccountDetails.address END,
+			phone_number = CASE WHEN r.phone_number IS NOT NULL AND r.phone_number <> 'null' AND r.phone_number <> 'string' AND r.phone_number NOT LIKE '%[^0-9]%' THEN 
+			r.phone_number ELSE AccountDetails.phone_number END,
+			gender = CASE WHEN r.gender IS NOT NULL AND r.gender <> 'null' AND r.gender <> 'string' THEN r.gender ELSE AccountDetails.gender END
+		from #Results r
+		where AccountDetails.accDetail_id = r.accDetail_id and r.status = '2';
+
+		--delete if status = 3
+		delete ad 
+		from AccountDetails ad
+		inner join #Results r
+			on ad.accDetail_id = r.accDetail_id
+		where r.status = '3'
+
+		DROP TABLE #Result
+	END;
+	SELECT '';
+end
+go
+
+
+--delete account
+create proc sp_delete_account
+(
+	@account_id int
+)
+as
+begin
+	delete Account
+	where account_id = @account_id
+end
+go
 
 --Brands
 --get brand by id
@@ -73,8 +255,20 @@ begin
 end
 go
 
---create or update brands
-create proc sp_create_or_update_brand
+--create brands
+CREATE PROC sp_create_brands
+(
+    @brand_name nvarchar(100)
+)
+AS
+BEGIN
+	insert into Brands(brand_name)
+	VALUES(@brand_name)
+END
+GO
+
+--update brands
+create proc sp_update_brand
 (
 	@brand_id int,
     @brand_name nvarchar(100)
@@ -111,23 +305,83 @@ begin
 end
 go
 
---categories
---get category by id
-create proc sp_get_category_by_id
+
+--category main
+--create
+CREATE PROC sp_create_category
 (
-    @category_id int
+	@categoryMain_name NVARCHAR(100),
+	@list_json_sub_category NVARCHAR(MAX)
 )
-as
-begin
-    select * from Categories
-    where category_id = @category_id
-end
-go
+AS
+BEGIN
+	DECLARE @categoryMain_id int;
+	insert into CategoryMain(
+		categoryMain_name
+	)
+	VALUES(@categoryMain_name)
+	set @categoryMain_id = (select SCOPE_IDENTITY())
+	if(@list_json_sub_category is not null)
+	BEGIN
+		insert into SubCategories(
+			subCategory_name,
+			categoryMain_id
+		)
+		select JSON_VALUE(l.value, '$.subCategory_name'),
+				@categoryMain_id
+		from openjson(@list_json_sub_category) as l;
+	END
+	select '';
+END
+GO
+
+--UPDATE
+CREATE proc sp_update_category(
+	@categoryMain_id int,
+	@categoryMain_name NVARCHAR(100),
+	@list_json_sub_category NVARCHAR(MAX)
+
+)
+AS
+BEGIN
+	UPDATE CategoryMain
+	SET
+		categoryMain_name = CASE WHEN @categoryMain_name IS NOT NULL AND @categoryMain_name <> 'null' AND @categoryMain_name <> 'string' THEN @categoryMain_name ELSE categoryMain_name END
+	where categoryMain_id = @categoryMain_id
+
+	if(@list_json_sub_category is not null)
+	BEGIN
+		select 
+				JSON_VALUE(l.value, '$.subCategory_id') as subCategory_id,
+				JSON_VALUE(l.value, '$.subCategory_name') as subCategory_name,
+				JSON_VALUE(l.value, '$.categoryMain_id') as categoryMain_id,
+				JSON_VALUE(l.value, '$.status') as status
+				into #Results;
+		from openjson(@list_json_sub_category) as l;
+
+		--insert if status = 1
+		
+END
+GO
+
+--DELETE
+create PROC sp_delete_category_main
+(
+	@categoryMain_id int
+)
+AS
+BEGIN
+	DELETE from CategoryMain
+	WHERE categoryMain_id = @categoryMain_id
+END
+GO
+
+--categories
 
 --get all product by category
 create proc sp_get_product_by_cate
 (
-	@category_name nvarchar(350)
+	@subCategory_name nvarchar(350)
 )
 as
 begin
@@ -135,155 +389,13 @@ begin
 		(
 			select p.*
 			from Products as p
-			where p.category_id = c.category_id FOR JSON PATH
+			where p.subCategory_id = c.subCategory_id FOR JSON PATH
 		) as list_json_product_by_cate
-		from Categories as c
-		where c.category_name = @category_name
+		from SubCategories as c
+		where c.subCategory_name = @subCategory_name
 end
 go
 
---get all category
-create proc sp_get_all_category
-as
-begin
-    select * from Categories
-end
-go
-
---create category
-create proc sp_create_category
-(
-    @category_name nvarchar(350)
-)
-as
-begin
-	insert into Categories(category_name)
-	values(@category_name)
-end
-go
-
---update category
-create proc sp_update_category
-(
-    @category_id int,
-    @category_name nvarchar(350)
-)
-as
-begin
-    if @category_name is not null and @category_name <> 'string'
-    begin
-        update Categories
-        set category_name = @category_name
-        where category_id = @category_id
-    end
-end
-go
-
---delete category
-create proc sp_delete_category
-(
-    @category_id int
-)
-as
-begin
-    delete Categories
-    where category_id = @category_id
-end
-go
-
---Accounts
---get account by id
-create proc sp_get_account_by_id
-(
-	@account_id int
-)
-as
-begin
-	select * from Account
-	where account_id = @account_id
-end
-go
-
---get account by username
-create proc sp_get_account_by_username
-(
-	@username nvarchar(500)
-)
-as
-begin
-	select top 1 * from Account
-	where username = @username
-end
-go
-
---login account
-create proc sp_login(@username nvarchar(500), @password varchar(256))
-as
-begin
-	select * from Account
-	where username = @username and password = @password
-end
-go
-
---create account
-create proc sp_create_account
-(
-	@username nvarchar(500),
-	@password varchar(256),
-	@address nvarchar(500),
-	@full_name nvarchar(500),
-	@phone_number varchar(20),
-	@email varchar(150),
-	@gender nvarchar(50),
-	@role_id int
-)
-as
-begin
-	insert into Account(username, password, address, full_name, phone_number, email, gender, role_id)
-	values(@username, @password, @address, @full_name, @phone_number, @email, @gender, @role_id)
-end
-go
-
---update customer
-create proc sp_update_account
-(
-	@account_id int,
-	@username nvarchar(500),
-	@password varchar(256),
-	@address nvarchar(500),
-	@full_name nvarchar(500),
-	@phone_number varchar(20),
-	@email varchar(150),
-	@gender nvarchar(50),
-	@role_id int
-)
-as
-begin
-	update Account
-	set
-		username = CASE WHEN @username IS NOT NULL AND @username <> 'null' AND @username <> 'string' THEN @username ELSE username END,
-		password = CASE WHEN @password IS NOT NULL AND @password <> 'null' AND @password <> 'string' THEN @password ELSE password END,
-		address = CASE WHEN @address IS NOT NULL AND @address <> 'null' AND @address <> 'string' THEN @address ELSE address END,
-		full_name = CASE WHEN @full_name IS NOT NULL AND @full_name <> 'null' AND @full_name <> 'string' THEN @full_name ELSE full_name END,
-		phone_number = CASE WHEN @phone_number IS NOT NULL AND @phone_number <> 'null' AND @phone_number <> 'string' AND @phone_number NOT LIKE '%[^0-9]%' THEN @phone_number ELSE phone_number END,
-		email = CASE WHEN @email IS NOT NULL AND @email <> 'null' AND @email <> 'string' THEN @email ELSE email END,
-		gender = CASE WHEN @gender IS NOT NULL AND @gender <> 'null' AND @gender <> 'string' THEN @gender else gender end,
-		role_id = CASE WHEN @role_id IS NOT NULL AND @role_id <> 'null' AND @role_id <> 'string' THEN @role_id else role_id end
-	where account_id = @account_id
-end
-go
-
---delete customer
-create proc sp_delete_account
-(
-	@account_id int
-)
-as
-begin
-	delete Account
-	where account_id = @account_id
-end
-go
 
 
 --Products
