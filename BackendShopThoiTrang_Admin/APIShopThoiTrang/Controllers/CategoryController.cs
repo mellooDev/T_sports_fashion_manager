@@ -19,14 +19,14 @@ namespace Api.BanHang.Controllers
 
         [Route("get-by-id/{id}")]
         [HttpGet]
-        public CategoriesModel GetCategorybyID(string id)
+        public SubCategoriesModel GetCategorybyID(string id)
         {
             return _categoryBusiness.GetCategorybyID(id);
         }
 
         [Route("get-product-by-cate-name/{name}")]
         [HttpGet]
-        public CategoriesModel GetProductByCategoryName(string name)
+        public SubCategoriesModel GetProductByCategoryName(string name)
         {
             return _categoryBusiness.GetProductByCategoryName(name);
         }
@@ -34,7 +34,7 @@ namespace Api.BanHang.Controllers
         [AllowAnonymous]
         [Route("get-all")]
         [HttpGet]
-        public List<CategoriesModel> GetAllCategories()
+        public List<SubCategoriesModel> GetAllCategories()
         {
             return _categoryBusiness.GetAllCategories();
         }
@@ -42,7 +42,7 @@ namespace Api.BanHang.Controllers
 
         [Route("create-category")]
         [HttpPost]
-        public CategoriesModel CreateKhach([FromBody] CategoriesModel model)
+        public SubCategoriesModel CreateKhach([FromBody] SubCategoriesModel model)
         {
             _categoryBusiness.Create(model);
             return model;
@@ -50,7 +50,7 @@ namespace Api.BanHang.Controllers
 
         [Route("update-category")]
         [HttpPut]
-        public CategoriesModel UpdateKhach([FromBody] CategoriesModel model)
+        public SubCategoriesModel UpdateKhach([FromBody] SubCategoriesModel model)
         {
             _categoryBusiness.Update(model);
             return model;

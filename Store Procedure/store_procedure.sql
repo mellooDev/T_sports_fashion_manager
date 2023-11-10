@@ -356,13 +356,37 @@ BEGIN
 				JSON_VALUE(l.value, '$.subCategory_name') as subCategory_name,
 				JSON_VALUE(l.value, '$.categoryMain_id') as categoryMain_id,
 				JSON_VALUE(l.value, '$.status') as status
-				into #Results;
+				into #Results
 		from openjson(@list_json_sub_category) as l;
 
 		--insert if status = 1
+		INSERT into SubCategories(subCategory_name, categoryMain_id)
+		SELECT 
+			#Results.subCategory_name,
+			@categoryMain_id
+		from #Results
+		WHERE #Results.status = '1'
+
+		--update if status = 2
+		update SubCategories
+		set
+			subCategory_name = #Results.subCategory_name,
+			categoryMain_id = #Results.categoryMain_id
+		from #Results
+		where SubCategories.subCategory_id = #Results.subCategory_id and #Results.status = '2'
+
+		--delete if status = 3
+		DELETE s
+		from SubCategories s
+		INNER JOIN #Results r on s.subCategory_id = r.subCategory_id 
+		where r.status = '3'
+		drop TABLE #Results
+	END
+	select ''
 		
 END
 GO
+
 
 --DELETE
 create PROC sp_delete_category_main
