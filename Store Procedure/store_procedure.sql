@@ -135,6 +135,7 @@ begin
 	IF(@list_json_account_details is not null)
 	BEGIN
 		INSERT into AccountDetails(
+			account_id,
 			full_name,
 			address,
 			phone_number,
@@ -145,7 +146,8 @@ begin
 					JSON_VALUE(l.value, "$.full_name"),
 					JSON_VALUE(l.value, "$.address"),
 					JSON_VALUE(l.value, "$.phone_number"),
-					JSON_VALUE(l.value, "$.email")
+					JSON_VALUE(l.value, "$.email"),
+					JSON_VALUE(l.value, "$.gender")
 			from openjson(@list_json_account_details) as l;
 	END
 	SELECT '';
@@ -178,6 +180,7 @@ begin
 			JSON_VALUE(l.value, '$.full_name') as full_name,
 			JSON_VALUE(l.value, '$.address') as address,
 			JSON_VALUE(l.value, '$.phone_number') as phone_number,
+			JSON_VALUE(l.value, '$.email') as email,
 			JSON_VALUE(l.value, '$.gender') as gender,
 			JSON_VALUE(l.value, '$.status') as status
 			into #Results
@@ -189,6 +192,7 @@ begin
 			full_name,
 			address,
 			phone_number,
+			email,
 			gender
 		)
 		SELECT 
@@ -196,6 +200,7 @@ begin
 			r.full_name,
 			r.address,
 			r.phone_number,
+			r.email,
 			r.gender
 		from #Results r
 		where r.status = '1'
@@ -434,6 +439,76 @@ begin
 	where product_id = @product_id
 end
 go
+
+--get all details of product by id
+CREATE proc sp_get_all_details_of_product_by_id
+(
+	@product_id INT
+)
+AS
+BEGIN
+	select p.product_id, p.product_name, p.price, p.discount, p.product_quantity, product_description, b.brand_name
+	from Products p INNER JOIN Product_details pd on p.product_id = pd.product_id
+	INNER join Brands b on p.brand_id = b.brand_id
+	WHERE p.product_id = @product_id
+end
+GO
+
+--search product by name
+CREATE proc sp_search_product
+(
+	@page_index int,
+	@page_size int,
+	@product_name nvarchar(500)
+)
+AS
+BEGIN
+	DECLARE @RecordCount BIGINT;
+	if(@page_size <> 0)
+	BEGIN
+		set NOCOUNT on;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc
+			)) as RowNumber,
+				p.product_name,
+				p.price,
+				p.discount,
+				p.image_avatar,
+				p.product_quantity
+				into #Results1
+			from Products as p
+			where (@product_name = '' or p.product_name like N'%' + @product_name + '%');
+			select @RecordCount = COUNT(*)
+			from #Results1;
+			SELECT *, @RecordCount as RecordCount
+			from #Results1
+			WHERE ROWNUMBER BETWEEN (@page_index - 1) * @page_size +1 and (((@page_index - 1) * @page_size + 1) + @page_size) - 1
+				or @page_index = -1;
+			drop TABLE #Results1;
+
+	END
+	ELSE
+	begin
+		set NOCOUNT on;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc
+			)) as RowNumber,
+				p.product_name,
+				p.price,
+				p.discount,
+				p.image_avatar,
+				p.product_quantity
+				into #Results2
+			from Products as p
+			where (@product_name = '' or p.product_name like N'%' + @product_name + '%');
+			select @RecordCount = COUNT(*)
+			from #Results2;
+			SELECT *, @RecordCount as RecordCount
+			from #Results2
+			drop TABLE #Results2;
+	END
+end
+GO
 
 
 --get all product
