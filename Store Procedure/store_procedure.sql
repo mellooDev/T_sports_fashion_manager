@@ -8,6 +8,7 @@ end
 go
 
 
+
 --create role
 create proc sp_create_role
 (
@@ -67,13 +68,13 @@ end
 go
 
 --get account details
-CREATE PROC sp_get_account_detail
+CREATE PROC sp_get_account_detail_by_id
 (
 	@account_id INT
 )
 AS
 BEGIN
-	select *
+	select a.account_id, username, password, full_name, address, phone_number, email, gender
 	from Account a inner join AccountDetails ad on a.account_id = ad.account_id
 	where a.account_id = @account_id
 END
@@ -81,13 +82,14 @@ GO
 
 
 --get account by username
-create proc sp_get_account_by_username
+create proc sp_get_account_details_by_username
 (
 	@username nvarchar(500)
 )
 as
 begin
-	select top 1 * from Account
+	select top 1 a.account_id, username, password, full_name, address, phone_number, email, gender
+	from Account a inner join AccountDetails ad on a.account_id = ad.account_id
 	where username = @username
 end
 go
@@ -259,6 +261,51 @@ begin
     select * from Brands
 end
 go
+
+--get all products by brand name
+CREATE proc sp_get_product_by_brand
+(
+	@page_index int,
+	@page_size int,
+	@brand_name nvarchar(100)
+)
+AS
+BEGIN
+	DECLARE @RecordCount bigint;
+	if (@page_size <> 0)
+	BEGIN
+		set NOCOUNT ON;
+			select(ROW_NUMBER() OVER(order by product_id asc)) as RowNumber,
+			p.*
+			into #Results1
+			from Brands as b inner join Products as p on b.brand_id = p.brand_id
+			where (@brand_name = '' or b.brand_name like N'%' + @brand_name + '%')
+			select @RecordCount = COUNT(*)
+			from #Results1;
+			SELECT *, @RecordCount as RecordCount
+			from #Results1
+			WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 and (((@page_index - 1) * @page_size + 1) + @page_size) - 1
+				or @page_index = -1;
+			drop TABLE #Results1;
+	END
+	ELSE
+	BEGIN
+		
+		set NOCOUNT ON;
+			select(ROW_NUMBER() OVER(order by product_id asc)) as RowNumber,
+			p.*
+			into #Results2
+			from Brands b inner join Products p on b.brand_id = p.brand_id
+			where (@brand_name = '' or b.brand_name like N'%' + @brand_name + '%')
+			select @RecordCount = COUNT(*)
+			from #Results2;
+			SELECT *, @RecordCount as RecordCount
+			from #Results2
+			drop TABLE #Results1;
+	END
+END
+GO
+			
 
 --create brands
 CREATE PROC sp_create_brands

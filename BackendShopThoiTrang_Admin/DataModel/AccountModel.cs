@@ -12,5 +12,7 @@
 
         public string token { get; set;}
 
+        public List<AccountDetailsModel> list_json_account_details { get; set; }
+
     }
 }
