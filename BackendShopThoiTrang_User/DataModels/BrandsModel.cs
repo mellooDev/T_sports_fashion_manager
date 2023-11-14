@@ -6,7 +6,7 @@
 
         public string brand_name { get; set; }
 
-        public List<ProductsModel> list_json_product { get; set; }
+        //public List<ProductsModel> list_json_product { get; set; }
 
     }
 }

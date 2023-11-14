@@ -9,15 +9,15 @@ namespace DataAccessLayer
 {
     public partial interface ICategoryRepository
     {
-        CategoriesModel GetCategorybyID(string id);
+        SubCategoriesModel GetCategorybyID(string id);
 
-        CategoriesModel GetProductByCategoryName(string name);
+        SubCategoriesModel GetProductByCategoryName(string name);
 
-        List<CategoriesModel> GetAllCategories();
+        List<SubCategoriesModel> GetAllCategories();
 
-        bool Create(CategoriesModel model);
+        bool Create(SubCategoriesModel model);
 
-        bool Update(CategoriesModel model);
+        bool Update(SubCategoriesModel model);
 
         bool Delete(string Id);
 

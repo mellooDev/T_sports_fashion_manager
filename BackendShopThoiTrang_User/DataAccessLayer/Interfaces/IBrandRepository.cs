@@ -11,6 +11,8 @@ namespace DataAccessLayer
     {
         BrandsModel GetBrandbyId(string id);
 
+        List<ProductsModel> Search(int pageIndex, int pageSize, out long total, string brand_name);
+
         BrandsModel GetProductbyBrandName(string name);
 
         List<BrandsModel> GetAllBrands();

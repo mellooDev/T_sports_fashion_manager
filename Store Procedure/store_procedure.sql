@@ -8,7 +8,6 @@ end
 go
 
 
-
 --create role
 create proc sp_create_role
 (
@@ -540,6 +539,7 @@ BEGIN
 			SELECT(ROW_NUMBER() OVER(
 				order by product_id asc
 			)) as RowNumber,
+				p.product_id,
 				p.product_name,
 				p.price,
 				p.discount,
@@ -557,6 +557,78 @@ BEGIN
 end
 GO
 
+--create proc search products by category and brand
+CREATE PROC sp_search_product_by_cate_and_brand
+(
+	@page_index int,
+	@page_size int,
+	@subCategory_name nvarchar(350),
+	@brand_name nvarchar(100)
+)
+AS
+BEGIN
+	DECLARE @RecordCount BIGINT;
+	if(@page_size <> 0)
+	BEGIN
+		set NOCOUNT on;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc
+			)) as RowNumber,
+				p.product_id,
+				p.product_name,
+				p.price,
+				p.discount,
+				p.image_avatar,
+				p.product_quantity
+				into #Results1
+			from Products as p inner join Brands as b on p.brand_id = b.brand_id
+			inner join SubCategories as s on p.subCategory_id = s.subCategory_id
+			where (@subCategory_name = '' or s.subCategory_name like N'%' + @subCategory_name + '%')
+			and (@brand_name = '' or b.brand_name like N'%' + @brand_name + '%');
+			select @RecordCount = COUNT(*)
+			from #Results1;
+			SELECT *, @RecordCount as RecordCount
+			from #Results1
+			WHERE ROWNUMBER BETWEEN (@page_index - 1) * @page_size +1 and (((@page_index - 1) * @page_size + 1) + @page_size) - 1
+				or @page_index = -1;
+			drop TABLE #Results1;
+	END
+	ELSE
+	BEGIN
+		set NOCOUNT on;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc
+			)) as RowNumber,
+				p.product_id,
+				p.product_name,
+				p.price,
+				p.discount,
+				p.image_avatar,
+				p.product_quantity
+				into #Results2
+			from Products as p inner join Brands as b on p.brand_id = b.brand_id
+			inner join SubCategories as s on p.subCategory_id = s.subCategory_id
+			where (@subCategory_name = '' or s.subCategory_name like N'%' + @subCategory_name + '%')
+			and (@brand_name = '' or b.brand_name like N'%' + @brand_name + '%');
+			select @RecordCount = COUNT(*)
+			from #Results2;
+			SELECT *, @RecordCount as RecordCount
+			from #Results2
+			drop TABLE #Results2;
+	END
+END
+GO
+
+--get new products
+create proc sp_get_new_products
+AS
+BEGIN
+	select top 12 product_id, product_name, price, discount, image_avatar, product_quantity, created_date, brand_name, subCategory_name from Products p
+	inner join Brands b on p.brand_id = b.brand_id
+	inner join SubCategories s on p.subCategory_id = s.subCategory_id
+	ORDER BY created_date
+end
+GO
 
 --get all product
 create proc sp_get_all_product
@@ -586,25 +658,53 @@ go
 
 
 --create product
---get product by id
 create proc sp_create_product
 (
 	@product_name nvarchar(500),
-	@description nvarchar(500),
-	@price int,
-	@discount int,
-	@image_link varchar(500),
+	@price DECIMAL(18, 0),
+	@discount DECIMAL(18, 0),
+	@image_avatar varchar(500),
 	@product_quantity int,
-	@updated_date datetime,
-	@category_id int,
-	@brand_id int
+	@subCategory_id int,
+	@brand_id int,
+	@list_json_product_details NVARCHAR(MAX)
 )
-as
-begin
-	insert into Products(product_name, description, price, discount, image_link, product_quantity, updated_date, category_id, brand_id)
-	values(@product_name, @description, @price, @discount, @image_link, @product_quantity, @updated_date, @category_id, @brand_id)
-end
-go
+AS
+BEGIN
+	DECLARE @product_id int;
+	insert into Products
+			(
+				product_name,
+				price,
+				discount,
+				image_avatar,
+				product_quantity,
+				subCategory_id,
+				brand_id
+			)
+			VALUES (
+				@product_name,
+				@price,
+				@image_avatar,
+				@product_quantity,
+				@subCategory_id,
+				@brand_id
+			)
+			set @product_id = (select SCOPE_IDENTITY())
+			if(@list_json_product_details is not null)
+			BEGIN
+				insert into Product_details
+				(
+					product_id,
+					product_description
+				)
+				select @product_id,
+					JSON_VALUE(p.value, '$.product_description')
+				from openjson(@list_json_account_details) as l;
+			END
+		SELECT '';
+END
+GO
 
 --update products
 create proc sp_update_product

@@ -11,27 +11,27 @@ namespace BusinessLogicLayer
         {
             _res = res;
         }
-        public CategoriesModel GetCategorybyID(string id)
+        public SubCategoriesModel GetCategorybyID(string id)
         {
             return _res.GetCategorybyID(id);
         }
 
-        public CategoriesModel GetProductByCategoryName(string name)
+        public SubCategoriesModel GetProductByCategoryName(string name)
         {
             return _res.GetProductByCategoryName(name);
         }
 
-        public List<CategoriesModel> GetAllCategories()
+        public List<SubCategoriesModel> GetAllCategories()
         {
             return _res.GetAllCategories();
         }
 
-        public bool Create(CategoriesModel model)
+        public bool Create(SubCategoriesModel model)
         {
             return _res.Create(model);
         }
 
-        public bool Update(CategoriesModel model)
+        public bool Update(SubCategoriesModel model)
         {
             return _res.Update(model);
         }

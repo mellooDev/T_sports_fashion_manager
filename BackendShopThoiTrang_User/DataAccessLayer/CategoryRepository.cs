@@ -11,7 +11,7 @@ namespace DataAccessLayer
         {
             _dbHelper = dbHelper;
         }
-        public CategoriesModel GetCategorybyID(string id)
+        public SubCategoriesModel GetCategorybyID(string id)
         {
             string msgError = "";
             try
@@ -20,7 +20,7 @@ namespace DataAccessLayer
                      "@category_id", id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<CategoriesModel>().FirstOrDefault();
+                return dt.ConvertTo<SubCategoriesModel>().FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -28,7 +28,7 @@ namespace DataAccessLayer
             }
         }
 
-        public CategoriesModel GetProductByCategoryName(string name)
+        public SubCategoriesModel GetProductByCategoryName(string name)
         {
             string msgError = "";
             try
@@ -37,7 +37,7 @@ namespace DataAccessLayer
                      "@category_name", name);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<CategoriesModel>().FirstOrDefault();
+                return dt.ConvertTo<SubCategoriesModel>().FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace DataAccessLayer
             }
         }
 
-        public List<CategoriesModel> GetAllCategories()
+        public List<SubCategoriesModel> GetAllCategories()
         {
             string msgError = "";
             try
@@ -53,7 +53,7 @@ namespace DataAccessLayer
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_all_category");
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<CategoriesModel>().ToList();
+                return dt.ConvertTo<SubCategoriesModel>().ToList();
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace DataAccessLayer
         }
 
 
-        public bool Create(CategoriesModel model)
+        public bool Create(SubCategoriesModel model)
         {
             string msgError = "";
             try
@@ -81,7 +81,7 @@ namespace DataAccessLayer
             }
         }
 
-        public bool Update(CategoriesModel model)
+        public bool Update(SubCategoriesModel model)
         {
             string msgError = "";
             try

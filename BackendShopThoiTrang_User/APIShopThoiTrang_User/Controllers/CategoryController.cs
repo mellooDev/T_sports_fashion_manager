@@ -20,14 +20,14 @@ namespace Api.BanHang.Controllers
 
         [Route("get-product-by-cate-name/{name}")]
         [HttpGet]
-        public CategoriesModel GetProductByCategoryName(string name)
+        public SubCategoriesModel GetProductByCategoryName(string name)
         {
             return _categoryBusiness.GetProductByCategoryName(name);
         }
 
         [Route("get-all")]
         [HttpGet]
-        public List<CategoriesModel> GetAllCategories()
+        public List<SubCategoriesModel> GetAllCategories()
         {
             return _categoryBusiness.GetAllCategories();
         }
