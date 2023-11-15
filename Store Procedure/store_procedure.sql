@@ -300,7 +300,7 @@ BEGIN
 			from #Results2;
 			SELECT *, @RecordCount as RecordCount
 			from #Results2
-			drop TABLE #Results1;
+			drop TABLE #Results2;
 	END
 END
 GO
@@ -451,26 +451,49 @@ BEGIN
 END
 GO
 
---categories
-
 --get all product by category
-create proc sp_get_product_by_cate
+CREATE proc sp_get_product_by_cate
 (
+	@page_index int,
+	@page_size int,
 	@subCategory_name nvarchar(350)
 )
-as
-begin
-	select c.*,
-		(
-			select p.*
-			from Products as p
-			where p.subCategory_id = c.subCategory_id FOR JSON PATH
-		) as list_json_product_by_cate
-		from SubCategories as c
-		where c.subCategory_name = @subCategory_name
-end
-go
-
+AS
+BEGIN
+	DECLARE @RecordCount bigint;
+	if (@page_size <> 0)
+	BEGIN
+		set NOCOUNT ON;
+			select(ROW_NUMBER() OVER(order by product_id asc)) as RowNumber,
+			p.*
+			into #Results1
+			from SubCategories as s inner join Products as p on p.subCategory_id = s.subCategory_id
+			where (@subCategory_name = '' or s.subCategory_name like N'%' + @subCategory_name + '%')
+			select @RecordCount = COUNT(*)
+			from #Results1;
+			SELECT *, @RecordCount as RecordCount
+			from #Results1
+			WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 and (((@page_index - 1) * @page_size + 1) + @page_size) - 1
+				or @page_index = -1;
+			drop TABLE #Results1;
+	END
+	ELSE
+	BEGIN
+		
+		set NOCOUNT ON;
+			select(ROW_NUMBER() OVER(order by product_id asc)) as RowNumber,
+			p.*
+			into #Results2
+			from SubCategories as s inner join Products as p on p.subCategory_id = s.subCategory_id
+			where (@subCategory_name = '' or s.subCategory_name like N'%' + @subCategory_name + '%')
+			select @RecordCount = COUNT(*)
+			from #Results2;
+			SELECT *, @RecordCount as RecordCount
+			from #Results2
+			drop TABLE #Results2;
+	END
+END
+GO
 
 
 --Products
@@ -619,6 +642,163 @@ BEGIN
 END
 GO
 
+--search product by price range
+CREATE PROC sp_search_product_by_price_range
+(
+	@page_index int,
+	@page_size int,
+	@fr_price DECIMAL(18, 0),
+	@to_price DECIMAL(18, 0)
+)
+AS
+BEGIN
+	DECLARE @RecordCount bigint;
+	if(@page_size <> 0)
+		BEGIN
+			SET NOCOUNT ON;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc)) as RowNumber,
+				product_id,
+				product_name
+				price,
+				discount,
+				image_avatar,
+				product_quantity,
+				subCategory_name,
+				brand_name
+			into #Results1
+			from Products p INNER JOIN SubCategories s ON p.subCategory_id = s.subCategory_id
+			INNER JOIN Brands b on p.brand_id = b.brand_id
+			WHERE ((@fr_price is null
+				and @to_price is null)
+				or (@fr_price is not null
+					and @to_price is null
+					and price >= @fr_price)
+				or (@fr_price is null
+					and @to_price is not null
+					and price <= @to_price)
+				or (price BETWEEN @fr_price and @to_price))
+			SELECT @RecordCount = COUNT(*)
+			from #Results1;
+			SELECT *, @RecordCount as RecordCount
+			from #Results1
+			where ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 and (((@page_index - 1) * @page_size + 1) + @page_size) - 1
+				or @page_index = -1
+			drop TABLE #Results1;
+		END
+		ELSE
+		BEGIN
+			SET NOCOUNT ON;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc)) as RowNumber,
+				product_id,
+				product_name
+				price,
+				discount,
+				image_avatar,
+				product_quantity,
+				subCategory_name,
+				brand_name
+			into #Results2
+			from Products p INNER JOIN SubCategories s ON p.subCategory_id = s.subCategory_id
+			INNER JOIN Brands b on p.brand_id = b.brand_id
+			WHERE ((@fr_price is null
+				and @to_price is null)
+				or (@fr_price is not null
+					and @to_price is null
+					and price >= @fr_price)
+				or (@fr_price is null
+					and @to_price is not null
+					and price <= @to_price)
+				or (price BETWEEN @fr_price and @to_price))
+			SELECT @RecordCount = COUNT(*)
+			from #Results2;
+			SELECT *, @RecordCount as RecordCount
+			from #Results2
+			drop TABLE #Results2;
+		END
+END
+GO
+
+--search product by date range
+CREATE PROC sp_search_product_by_date_range
+(
+	@page_index int,
+	@page_size int,
+	@fr_date datetime,
+	@to_date DATETIME
+)
+AS
+BEGIN
+	DECLARE @RecordCount bigint;
+	if(@page_size <> 0)
+		BEGIN
+			SET NOCOUNT ON;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc)) as RowNumber,
+				product_id,
+				product_name
+				price,
+				discount,
+				image_avatar,
+				product_quantity,
+				subCategory_name,
+				brand_name
+			into #Results1
+			from Products p INNER JOIN SubCategories s ON p.subCategory_id = s.subCategory_id
+			INNER JOIN Brands b on p.brand_id = b.brand_id
+			WHERE ((@fr_date is null
+				and @to_date is null)
+				or (@fr_date is not null
+					and @to_date is null
+					and price >= @fr_date)
+				or (@fr_date is null
+					and @to_date is not null
+					and price <= @to_date)
+				or (price BETWEEN @fr_date and @to_date))
+			SELECT @RecordCount = COUNT(*)
+			from #Results1;
+			SELECT *, @RecordCount as RecordCount
+			from #Results1
+			where ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 and (((@page_index - 1) * @page_size + 1) + @page_size) - 1
+				or @page_index = -1
+			drop TABLE #Results1;
+		END
+		ELSE
+		BEGIN
+			SET NOCOUNT ON;
+			SELECT(ROW_NUMBER() OVER(
+				order by product_id asc)) as RowNumber,
+				product_id,
+				product_name
+				price,
+				discount,
+				image_avatar,
+				product_quantity,
+				subCategory_name,
+				brand_name
+			into #Results2
+			from Products p INNER JOIN SubCategories s ON p.subCategory_id = s.subCategory_id
+			INNER JOIN Brands b on p.brand_id = b.brand_id
+			WHERE ((@fr_date is null
+				and @to_date is null)
+				or (@fr_date is not null
+					and @to_date is null
+					and price >= @fr_date)
+				or (@fr_date is null
+					and @to_date is not null
+					and price <= @to_date)
+				or (price BETWEEN @fr_date and @to_date))
+			SELECT @RecordCount = COUNT(*)
+			from #Results2;
+			SELECT *, @RecordCount as RecordCount
+			from #Results2
+			drop TABLE #Results2;
+		END
+END
+GO
+
+
 --get new products
 create proc sp_get_new_products
 AS
@@ -635,24 +815,6 @@ create proc sp_get_all_product
 as
 begin
 	select * from Products
-end
-go
-
---get by brand
-create proc sp_get_product_by_brand
-(
-	@brand_name nvarchar(100)
-)
-as
-begin
-	select b.*,
-		(
-			select p.*
-			from Products as p
-			where p.brand_id = b.brand_id FOR JSON PATH
-		) as list_json_product
-		from Brands as b
-		where b.brand_name = @brand_name
 end
 go
 
@@ -707,35 +869,70 @@ END
 GO
 
 --update products
-create proc sp_update_product
+CREATE PROC sp_update_product
 (
 	@product_id int,
 	@product_name nvarchar(500),
-	@description nvarchar(500),
-	@price int,
-	@discount int,
-	@image_link varchar(500),
+	@price DECIMAL(18, 0),
+	@discount DECIMAL(18, 0),
+	@image_avatar varchar(500),
 	@product_quantity int,
 	@updated_date datetime,
-	@category_id int,
-	@brand_id int
+	@subCategory_id int,
+	@brand_id int,
+	@list_json_product_details NVARCHAR(MAX)
 )
-as
-begin
-	update Products
-	set
+AS
+BEGIN
+	UPDATE Products
+	SET
 		product_name = CASE WHEN @product_name IS NOT NULL AND @product_name <> 'null' AND @product_name <> 'string' THEN @product_name ELSE product_name END,
-		description = CASE WHEN @description IS NOT NULL AND @description <> 'null' AND @description <> 'string' THEN @description ELSE description END,
 		price = CASE WHEN @price IS NOT NULL AND @price <> 'null' AND @price <> 'string' THEN @price ELSE price END,
 		discount = CASE WHEN @discount IS NOT NULL AND @discount <> 'null' AND @discount <> 'string' THEN @discount ELSE discount END,
-		image_link = CASE WHEN @image_link IS NOT NULL AND @image_link <> 'null' AND @image_link <> 'string' THEN @image_link ELSE image_link END,
+		image_avatar = CASE WHEN @image_avatar IS NOT NULL AND @image_avatar <> 'null' AND @image_avatar <> 'string' THEN @image_avatar ELSE image_avatar END,
 		product_quantity = CASE WHEN @product_quantity IS NOT NULL AND @product_quantity <> 'null' AND @product_quantity <> 'string' THEN @product_quantity ELSE product_quantity END,
-		updated_date = GETDATE(),
-		category_id = CASE WHEN @category_id IS NOT NULL AND @category_id <> 'null' AND @category_id <> 'string' THEN @category_id ELSE category_id END,
+		updated_date = CAST(GETDATE() as date),
+		subCategory_id = CASE WHEN @subCategory_id IS NOT NULL AND @subCategory_id <> 'null' AND @subCategory_id <> 'string' THEN @subCategory_id ELSE subCategory_id END,
 		brand_id = CASE WHEN @brand_id IS NOT NULL AND @brand_id <> 'null' AND @brand_id <> 'string' THEN @brand_id ELSE brand_id END
-	where product_id = @product_id
-end
-go
+	WHERE product_id = @product_id
+	IF(@list_json_product_details is not null)
+	BEGIN
+		SELECT
+			JSON_VALUE(l.value, '$.product_detail_id') as product_detail_id,
+			JSON_VALUE(l.value, '$.product_id') as product_id,
+			JSON_VALUE(l.value, '$.product_description') as product_description,
+			JSON_VALUE(l.value, '$.status') as status
+		into #Results
+		FROM openjson(@list_json_account_details) as l;
+
+		--insert if status = 1
+		INSERT into Product_details(
+			product_id,
+			product_description
+		)
+			SELECT 
+				@product_id,
+				#Results.product_description
+			from #Results
+			WHERE #Results.status = '1'
+
+		--update if status = 2
+		UPDATE Product_details
+		SET
+			product_description = #Results.product_description
+		from #Results
+		WHERE Product_details.product_description = #Results.product_description and #Results.status = '2'
+
+		--delete if status = 3
+		DELETE pd
+		from Product_details pd
+		inner join #Results r on pd.product_detail_id = r.product_detail_id
+		WHERE r.status = '3'
+		drop TABLE #Results
+	END
+	SELECT '';
+END
+GO
 
 --delete product
 create proc sp_delete_product
