@@ -1,191 +1,451 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <title>crud dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!----css3---->
+  <link rel="stylesheet" href="css/brand.css">
 
-	<!-- Boxicons -->
-	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
-	<!-- GG fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!--google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<!-- My CSS -->
-	<link rel="stylesheet" href="assets/css/brand.css">
-	<script src="assets/js/ajax.googleapis.com_ajax_libs_angularjs_1.6.9_angular.min.js"></script>
-	<script src="assets/js/ajax.googleapis.com_ajax_libs_jquery_3.6.4_jquery.min.js"></script>
+  <!--google material icon-->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 
-	<title>AdminHub</title>
 </head>
-<body ng-app="CategoryApp" ng-controller="CategoryCtrl">
 
-
-	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="#" class="brand">
-			<i class='bx bxs-cookie'></i>
-			<span class="text">MyFood</span>
-		</a>
-		<ul class="side-menu top">
-			<li>
-				<a href="category.html">
-					<i class='bx bxs-dashboard' id="dashboard"></i>
-					<span class="text">Danh mục</span>
-				</a>
-			</li>
-			<li class="active">
-				<a href="brand.html">
-					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Thương hiệu</span>
-				</a>
-			</li>
-			<li>
-				<a href="product.html" id="product_menu">
-					<i class='bx bxs-dish'></i>
-					<span class="text">Sản phẩm</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bx-user' ></i>
-					<span class="text">Sản phẩm bán chạy</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-group'></i>
-					<span class="text">Khách hàng</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-notepad'></i>
-					<span class="text">Hóa đơn nhập</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bx-info-circle' ></i>
-					<span class="text">Chi tiết hóa đơn nhập</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" id="product_sell">
-					<i class='bx bxs-notepad'></i>
-					<span class="text">Hóa đơn bán</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bx-info-circle' ></i>
-					<span class="text">Chi tiết hóa đơn bán</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Cài đặt</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Đăng xuất</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
+<body>
 
 
 
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="image/follow_1.png">
-			</a>
-		</nav>
-		<!-- NAVBAR -->
+  <div class="wrapper">
 
-		<!-- MAIN -->
-		<main>
-			<div class="action-table">
-				<button class="add-product">
-					<i class="fa-solid fa-plus"></i>
-					Thêm thương hiệu
-				</button>
-				<button class="update-product">
-					<i class="fa-solid fa-pen-to-square"></i>
-					Sửa thương hiệu
-				</button>
-			</div>
-			<table id="table_product">
-				<tr>
-					<th class="stt_col">STT</th>
-					<th class="name_col">Tên danh mục</th>
-					<th class="other_col"></th>
-				</tr>
-				<tr ng-repeat="x in listDistributor" class="main_row">
-					<td class="table_main">{{x.category_id}}</td>
-					</td>
-					<td class="main_text">{{x.category_name}}</td>
-					<td>
-						<div class="button_col">
-							<div class="button btn_edit">
-								<i class="fa-solid fa-pencil"></i>
-							</div>
-							<div class="button btn_watch">
-								<i class="fa-solid fa-eye"></i>
-							</div>
-							<div class="button btn_delete">
-								<i class="fa-solid fa-trash-can"></i>
-							</div>
-						</div>
-					</td>
-				</tr>
+    <div class="body-overlay"></div>
+
+    <!-------sidebar--design------------>
+
+    <div id="sidebar">
+      <a href="index.html">
+        <div class="sidebar-header">
+          <h3><img src="img/logo.png" class="img-fluid" /><span>vishweb design</span></h3>
+        </div>
+      </a>
+
+      <ul class="list-unstyled component m-0">
+
+        <li class="dropdown">
+          <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            Sản phẩm
+          </a>
+          <ul class="collapse list-unstyled menu" id="homeSubmenu1">
+            <li><a href="productManage.html">Quản lý sản phẩm</a></li>
+            <li><a href="#">Sản phẩm mới</a></li>
+            <li><a href="#">Sản phẩm bán chạy</a></li>
+          </ul>
+        </li>
 
 
+        <li class="dropdown">
+          <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            Thương hiệu
+          </a>
+          <ul class="collapse list-unstyled menu" id="homeSubmenu2">
+            <li class="active"><a href="#">Quản lý thương hiệu</a></li>
+          </ul>
+        </li>
 
-			</table>
+        <li class="dropdown">
+          <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            Danh mục
+          </a>
+          <ul class="collapse list-unstyled menu" id="homeSubmenu3">
+            <li><a href="#">Quản lý danh mục</a></li>
+          </ul>
+        </li>
 
-			
-		</main>
-		<!-- MAIN -->
-	</section>
-	<!-- CONTENT -->
-	
 
-	<script src="assets/js/category.js"></script>
-	<script src="assets/js/product.js"></script>
-	<script src="assets/js/global.js"></script>
-	<script>
-		var userAcc = JSON.parse(localStorage.getItem('user'))
-		if(!userAcc){
-			window.location.href='./login.html'
-		}
-	</script>
+        <li class="dropdown">
+          <a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            Hóa đơn bán hàng
+          </a>
+          <ul class="collapse list-unstyled menu" id="homeSubmenu4">
+            <li><a href="orderInvoice.html">Quản lý hóa đơn</a></li>
+            <li><a href="#">Thống kê hóa đơn</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#homeSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            Hóa đơn nhập
+          </a>
+          <ul class="collapse list-unstyled menu" id="homeSubmenu5">
+            <li><a href="#">Quản lý hóa đơn</a></li>
+            <li><a href="#">Thống kê hóa đơn</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#homeSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            Tài khoản
+          </a>
+          <ul class="collapse list-unstyled menu" id="homeSubmenu6">
+            <li><a href="#">Quản lý tài khoản</a></li>
+          </ul>
+        </li>
+
+
+      </ul>
+    </div>
+
+    <!-------sidebar--design- close----------->
+
+
+
+    <!-------page-content start----------->
+
+    <div id="content">
+
+      <!------top-navbar-start----------->
+
+      <div class="top-navbar">
+        <div class="xd-topbar">
+          <div class="row">
+            <div class="col-2 col-md-1 col-lg-1 order-2 order-md-1 align-self-center">
+              <div class="xp-menubar">
+                <span class="material-icons text-white">signal_cellular_alt</span>
+              </div>
+            </div>
+
+            <div class="col-md-5 col-lg-3 order-3 order-md-2">
+              <div class="xp-searchbar">
+                <form>
+                  <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                      <button class="btn" type="submit" id="button-addon2">Go
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+            <div class="col-10 col-md-6 col-lg-8 order-1 order-md-3">
+              <div class="xp-profilebar text-right">
+                <nav class="navbar p-0">
+                  <ul class="nav navbar-nav flex-row ml-auto">
+                    <li class="dropdown nav-item active">
+                      <a class="nav-link" href="#" data-toggle="dropdown">
+                        <span class="material-icons">notifications</span>
+                        <span class="notification">4</span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">You Have 4 New Messages</a></li>
+                        <li><a href="#">You Have 4 New Messages</a></li>
+                        <li><a href="#">You Have 4 New Messages</a></li>
+                        <li><a href="#">You Have 4 New Messages</a></li>
+                      </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <span class="material-icons">question_answer</span>
+                      </a>
+                    </li>
+
+                    <li class="dropdown nav-item">
+                      <a class="nav-link" href="#" data-toggle="dropdown">
+                        <img src="img/user.jpg" style="width:40px; border-radius:50%;" />
+                        <span class="xp-user-live"></span>
+                      </a>
+                      <ul class="dropdown-menu small-menu">
+                        <li><a href="#">
+                            <span class="material-icons">person_outline</span>
+                            Profile
+                          </a></li>
+                        <li><a href="#">
+                            <span class="material-icons">settings</span>
+                            Settings
+                          </a></li>
+                        <li><a href="#">
+                            <span class="material-icons">logout</span>
+                            Logout
+                          </a></li>
+
+                      </ul>
+                    </li>
+
+
+                  </ul>
+                </nav>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="xp-breadcrumbbar text-center">
+            <h4 class="page-title">Dashboard</h4>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Vishweb</a></li>
+              <li class="breadcrumb-item active" aria-curent="page">Dashboard</li>
+            </ol>
+          </div>
+
+
+        </div>
+      </div>
+      <!------top-navbar-end----------->
+
+
+      <!------main-content-start----------->
+
+      <div class="main-content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-wrapper">
+
+              <div class="table-title">
+                <div class="row">
+                  <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+                    <h2 class="ml-lg-2">Manage Category</h2>
+                  </div>
+                  <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
+                      <i class="material-icons">&#xE147;</i>
+                      <span>Add New Category</span>
+                    </a>
+                    <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal">
+                      <i class="material-icons">&#xE15C;</i>
+                      <span>Delete</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th><span class="custom-checkbox">
+                        <input type="checkbox" id="selectAll">
+                        <label for="selectAll"></label></th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Parent Category</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <th><span class="custom-checkbox">
+                        <input type="checkbox" id="checkbox1" name="option[]" value="1">
+                        <label for="checkbox1"></label></th>
+                    <th>1</th>
+                    <th>Thomas Hardy</th>
+                    <th>Nam</th>
+                    <th>
+                      <a href="#editEmployeeModal" class="edit" data-toggle="modal">
+                        <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                      </a>
+                      <a href="#deleteEmployeeModal" class="delete" data-toggle="modal">
+                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                      </a>
+                    </th>
+                  </tr>
+
+
+
+                </tbody>
+
+
+              </table>
+
+              <div class="clearfix">
+                <div class="hint-text">showing <b>5</b> out of <b>25</b></div>
+                <ul class="pagination">
+                  <li class="page-item disabled"><a href="#">Previous</a></li>
+                  <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                  <li class="page-item "><a href="#" class="page-link">2</a></li>
+                  <li class="page-item "><a href="#" class="page-link">3</a></li>
+                  <li class="page-item "><a href="#" class="page-link">4</a></li>
+                  <li class="page-item "><a href="#" class="page-link">5</a></li>
+                  <li class="page-item "><a href="#" class="page-link">Next</a></li>
+                </ul>
+              </div>
+
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+
+
+          <!----add-modal start--------->
+          <div class="modal fade" tabindex="-1" id="addEmployeeModal" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Category</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Parent Category</label>
+                    <select name="" id="" class="form-control" aria-placeholder="scsdcs">
+                      <option value="" class="form-control"disabled selected>Choose a parent category</option>
+                      <option value="" class="form-control">Nam</option>
+                    </select>
+                  </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!----edit-modal end--------->
+
+
+
+
+
+          <!----edit-modal start--------->
+          <div class="modal fade" tabindex="-1" id="editEmployeeModal" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Category</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Parent Category</label>
+                    <select name="" id="" class="form-control" aria-placeholder="scsdcs">
+                      <option value="" class="form-control"disabled selected>Choose a parent category</option>
+                      <option value="" class="form-control">Nam</option>
+                    </select>
+                  </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!----edit-modal end--------->
+
+
+          <!----delete-modal start--------->
+          <div class="modal fade" tabindex="-1" id="deleteEmployeeModal" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete Employees</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete this Records</p>
+                  <p class="text-warning"><small>this action Cannot be Undone,</small></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!----edit-modal end--------->
+
+
+
+
+        </div>
+      </div>
+
+      <!------main-content-end----------->
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-------complete html----------->
+
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery-3.3.1.slim.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-3.3.1.min.js"></script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".xp-menubar").on('click', function () {
+        $("#sidebar").toggleClass('active');
+        $("#content").toggleClass('active');
+      });
+
+      $('.xp-menubar,.body-overlay').on('click', function () {
+        $("#sidebar,.body-overlay").toggleClass('show-nav');
+      });
+
+    });
+  </script>
+
+
+
+
+
 </body>
+
 </html>

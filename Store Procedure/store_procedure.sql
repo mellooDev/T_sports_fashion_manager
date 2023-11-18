@@ -946,79 +946,26 @@ begin
 end
 go
 
---search product by name products or price range
-create PROCEDURE [dbo].[sp_product_search] (@page_index  INT, 
-                                       @page_size   INT,
-									   @product_name nvarchar(500),
-									   @fr_price int,
-									   @to_price int)
+
+--voucher
+--get voucher by date
+create proc sp_get_voucher_by_date
+(
+	@fr_date datetime,
+	@to_date datetime
+)
 AS
-    BEGIN
-        DECLARE @RecordCount BIGINT;
-        IF(@page_size <> 0)
-            BEGIN
-                SET NOCOUNT ON;
-                        SELECT(ROW_NUMBER() OVER(
-                              ORDER BY product_id ASC)) AS RowNumber, 
-                              p.product_id,
-							  p.product_name,
-							  p.price,
-							  p.discount,
-							  p.product_quantity,
-							  p.created_date
-                        INTO #Results1
-                        FROM [Products] AS p
-					    WHERE (@product_name = '' or p.product_name like N'%' + @product_name +'%') and
-						((@fr_price IS NULL
-                        AND @to_price IS NULL)
-                        OR (@fr_price IS NOT NULL
-                            AND @to_price IS NULL
-                            AND p.price >= @fr_price)
-                        OR (@fr_price IS NULL
-                            AND @to_price IS NOT NULL
-                            AND p.price <= @to_price)
-                        OR (p.price BETWEEN @fr_price AND @to_price))
-                        SELECT @RecordCount = COUNT(*)
-                        FROM #Results1;
-                        SELECT *, 
-                               @RecordCount AS RecordCount
-                        FROM #Results1
-                        WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 AND(((@page_index - 1) * @page_size + 1) + @page_size) - 1
-                              OR @page_index = -1;
-                        DROP TABLE #Results1; 
-            END;
-            ELSE
-            BEGIN
-                SET NOCOUNT ON;
-                        SELECT(ROW_NUMBER() OVER(
-                              ORDER BY product_id ASC)) AS RowNumber, 
-                              p.product_id,
-							  p.product_name,
-							  p.price,
-							  p.discount,
-							  p.product_quantity,
-							  p.created_date
-                        INTO #Results2
-                        FROM [Products] AS p
-					    WHERE (@product_name = '' or p.product_name like N'%' + @product_name +'%') and
-						((@fr_price IS NULL
-                        AND @to_price IS NULL)
-                        OR (@fr_price IS NOT NULL
-                            AND @to_price IS NULL
-                            AND p.price >= @fr_price)
-                        OR (@fr_price IS NULL
-                            AND @to_price IS NOT NULL
-                            AND p.price <= @to_price)
-                        OR (p.price BETWEEN @fr_price AND @to_price))
-                        SELECT @RecordCount = COUNT(*)
-                        FROM #Results2;
-                        SELECT *, 
-                               @RecordCount AS RecordCount
-                        FROM #Results2
-						DROP TABLE #Results2;
-        END;
-    END;
-go
+BEGIN
+	SELECT* from Vouchers
+	WHERE ((@fr_date is null
+		and @to_date is null)
+		or (@fr_date is not null
+			and @to_date is null
+			and time_start >= @fr_date)
+		or (@fr_date is null
+			and @to_date is not null
+			and time_start <= @to_date)
+		or (time_start BETWEEN @fr_date and @to_date))
 
 
 --Import
