@@ -16,9 +16,19 @@ namespace BusinessLogicLayer
             return _res.GetProductbyId(id);
         }
 
-        public List<ProductsModel> GetAllProducts()
+        public ProductsModel GetAllDetailsOfProductbyId(string id)
         {
-            return _res.GetAllProducts();
+            return _res.GetAllDetailsOfProductbyId(id);
+        }
+
+        public List<ProductsModel> GetNewProducts()
+        {
+            return _res.GetNewProducts();
+        }
+
+        public List<ProductsModel> GetProductByCategoryName(int pageIndex, int pageSize, out long total, string name)
+        {
+            return _res.GetProductByCategoryName(pageIndex, pageSize, out total, name);
         }
 
         public bool Create(ProductsModel model)
@@ -36,9 +46,19 @@ namespace BusinessLogicLayer
             return _res.Delete(Id);
         }
 
-        public List<ProductsModel> Search(int pageIndex, int pageSize, out long total, string product_name, int fr_price, int to_price)
+        public List<ProductsModel> SearchByName(int pageIndex, int pageSize, out long total, string product_name)
         {
-            return _res.Search(pageIndex, pageSize, out total, product_name, fr_price, to_price);
+            return _res.SearchByName(pageIndex, pageSize, out total, product_name);
+        }
+
+        public List<ProductsModel> SearchByPrice(int pageIndex, int pageSize, out long total, decimal fr_price, decimal to_price)
+        {
+            return _res.SearchByPrice(pageIndex, pageSize, out total, fr_price, to_price);
+        }
+
+        public List<ProductsModel> SearchByDate(int pageIndex, int pageSize, out long total, DateTime? fr_date, DateTime? to_date)
+        {
+            return _res.SearchByDate(pageIndex, pageSize, out total, fr_date, to_date);
         }
     }
 }

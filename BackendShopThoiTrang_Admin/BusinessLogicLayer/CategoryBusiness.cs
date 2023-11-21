@@ -6,32 +6,18 @@ namespace BusinessLogicLayer
 {
     public class CategoryBusiness : ICategoryBusiness
     {
-        private ISubCategoryRepository _res;
-        public CategoryBusiness(ISubCategoryRepository res)
+        private ICategoryRepository _res;
+        public CategoryBusiness(ICategoryRepository res)
         {
             _res = res;
         }
-        public SubCategoriesModel GetCategorybyID(string id)
-        {
-            return _res.GetCategorybyID(id);
-        }
 
-        public SubCategoriesModel GetProductByCategoryName(string name)
-        {
-            return _res.GetProductByCategoryName(name);
-        }
-
-        public List<SubCategoriesModel> GetAllCategories()
-        {
-            return _res.GetAllCategories();
-        }
-
-        public bool Create(SubCategoriesModel model)
+        public bool Create(CategoryMainModel model)
         {
             return _res.Create(model);
         }
 
-        public bool Update(SubCategoriesModel model)
+        public bool Update(CategoryMainModel model)
         {
             return _res.Update(model);
         }

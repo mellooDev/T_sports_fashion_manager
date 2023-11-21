@@ -29,14 +29,52 @@ namespace DataAccessLayer
             }
         }
 
-        public List<ProductsModel> GetAllProducts()
+        public ProductsModel GetAllDetailsOfProductbyId(string id)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_all_product");
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_all_details_of_product_by_id",
+                     "@product_id", id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
+                return dt.ConvertTo<ProductsModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProductsModel> GetNewProducts()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_new_products");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<ProductsModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProductsModel> GetProductByCategoryName(int pageIndex, int pageSize, out long total, string name)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_product_by_cate",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
+                    "@category_name", name);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<ProductsModel>().ToList();
             }
             catch (Exception ex)
@@ -121,7 +159,7 @@ namespace DataAccessLayer
             }
         }
 
-        public List<ProductsModel> Search(int pageIndex, int pageSize, out long total, string product_name, int fr_price, int to_price)
+        public List<ProductsModel> SearchByName(int pageIndex, int pageSize, out long total, string product_name)
         {
             string msgError = "";
             total = 0;
@@ -130,9 +168,51 @@ namespace DataAccessLayer
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_search",
                     "@page_index", pageIndex,
                     "@page_size", pageSize,
-                    "@product_name", product_name,
+                    "@product_name", product_name);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<ProductsModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProductsModel> SearchByPrice(int pageIndex, int pageSize, out long total, decimal fr_price, decimal to_price)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_search_product_by_price_range",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
                     "@fr_price", fr_price,
                     "@to_price", to_price);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<ProductsModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProductsModel> SearchByDate(int pageIndex, int pageSize, out long total, DateTime? fr_date, DateTime? to_date)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_search_product_by_price_range",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
+                    "@fr_date", fr_date,
+                    "@to_date", to_date);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];

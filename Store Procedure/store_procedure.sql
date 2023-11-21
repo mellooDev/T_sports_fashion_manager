@@ -490,9 +490,7 @@ BEGIN
 	END
 END
 GO
---(ran)
 
---Products (not run)
 --get product by id
 create proc sp_get_product_by_id
 (
@@ -747,11 +745,11 @@ BEGIN
 				and @to_date is null)
 				or (@fr_date is not null
 					and @to_date is null
-					and price >= @fr_date)
+					and created_date >= @fr_date)
 				or (@fr_date is null
 					and @to_date is not null
-					and price <= @to_date)
-				or (price BETWEEN @fr_date and @to_date))
+					and created_date <= @to_date)
+				or (created_date BETWEEN @fr_date and @to_date))
 			SELECT @RecordCount = COUNT(*)
 			from #Results1;
 			SELECT *, @RecordCount as RecordCount
@@ -780,11 +778,11 @@ BEGIN
 				and @to_date is null)
 				or (@fr_date is not null
 					and @to_date is null
-					and price >= @fr_date)
+					and created_date >= @fr_date)
 				or (@fr_date is null
 					and @to_date is not null
-					and price <= @to_date)
-				or (price BETWEEN @fr_date and @to_date))
+					and created_date <= @to_date)
+				or (created_date BETWEEN @fr_date and @to_date))
 			SELECT @RecordCount = COUNT(*)
 			from #Results2;
 			SELECT *, @RecordCount as RecordCount
@@ -805,7 +803,9 @@ BEGIN
 	ORDER BY created_date
 end
 GO
+--ran
 
+--not run
 --get all product
 create proc sp_get_all_product
 as

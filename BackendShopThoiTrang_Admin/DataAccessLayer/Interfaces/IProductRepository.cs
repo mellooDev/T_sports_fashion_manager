@@ -11,7 +11,11 @@ namespace DataAccessLayer
     {
         ProductsModel GetProductbyId(string id);
 
-        List<ProductsModel> GetAllProducts();
+        ProductsModel GetAllDetailsOfProductbyId(string id);
+
+        List<ProductsModel> GetProductByCategoryName(int pageIndex, int pageSize, out long total, string name);
+
+        List<ProductsModel> GetNewProducts();
 
         bool Create(ProductsModel model);
 
@@ -19,7 +23,11 @@ namespace DataAccessLayer
 
         bool Delete(string Id);
 
-        List<ProductsModel> Search(int pageIndex, int pageSize, out long total, string product_name, int fr_price, int to_price);
+        List<ProductsModel> SearchByName(int pageIndex, int pageSize, out long total, string product_name);
+
+        List<ProductsModel> SearchByPrice(int pageIndex, int pageSize, out long total, decimal fr_price, decimal to_price);
+
+        List<ProductsModel> SearchByDate(int pageIndex, int pageSize, out long total, DateTime? fr_date, DateTime? to_date);
 
     }
 }

@@ -17,32 +17,10 @@ namespace Api.BanHang.Controllers
             _categoryBusiness = categoryBusiness;
         }
 
-        [Route("get-by-id/{id}")]
-        [HttpGet]
-        public SubCategoriesModel GetCategorybyID(string id)
-        {
-            return _categoryBusiness.GetCategorybyID(id);
-        }
-
-        [Route("get-product-by-cate-name/{name}")]
-        [HttpGet]
-        public SubCategoriesModel GetProductByCategoryName(string name)
-        {
-            return _categoryBusiness.GetProductByCategoryName(name);
-        }
-
-        [AllowAnonymous]
-        [Route("get-all")]
-        [HttpGet]
-        public List<SubCategoriesModel> GetAllCategories()
-        {
-            return _categoryBusiness.GetAllCategories();
-        }
-
 
         [Route("create-category")]
         [HttpPost]
-        public SubCategoriesModel CreateKhach([FromBody] SubCategoriesModel model)
+        public CategoryMainModel CreateCategory([FromBody] CategoryMainModel model)
         {
             _categoryBusiness.Create(model);
             return model;
@@ -50,7 +28,7 @@ namespace Api.BanHang.Controllers
 
         [Route("update-category")]
         [HttpPut]
-        public SubCategoriesModel UpdateKhach([FromBody] SubCategoriesModel model)
+        public CategoryMainModel UpdateCategory([FromBody] CategoryMainModel model)
         {
             _categoryBusiness.Update(model);
             return model;
@@ -58,11 +36,11 @@ namespace Api.BanHang.Controllers
 
         [Route("delete-category")]
         [HttpDelete]
-        public IActionResult DeleteKhach([FromBody] Dictionary<string, object> formData)
+        public IActionResult DeleteCategory([FromBody] Dictionary<string, object> formData)
         {
-            string KhachHangID = "";
-            if (formData.Keys.Contains("KhachHangID") && !string.IsNullOrEmpty(Convert.ToString(formData["KhachHangID"]))) { KhachHangID = Convert.ToString(formData["KhachHangID"]); }
-            _categoryBusiness.Delete(KhachHangID);
+            string categoryMain_id = "";
+            if (formData.Keys.Contains("categoryMain_id") && !string.IsNullOrEmpty(Convert.ToString(formData["categoryMain_id"]))) { categoryMain_id = Convert.ToString(formData["categoryMain_id"]); }
+            _categoryBusiness.Delete(categoryMain_id);
             return Ok();
         }
     }

@@ -28,11 +28,11 @@ namespace Api.BanHang.Controllers
             return _productBusiness.GetProductbyId(id);
         }
 
-        [Route("get-all")]
+        [Route("get-new-product")]
         [HttpGet]
-        public List<ProductsModel> GetAllProducts()
+        public List<ProductsModel> GetNewProducts()
         {
-            return _productBusiness.GetAllProducts();
+            return _productBusiness.GetNewProducts();
         }
 
 
@@ -126,9 +126,9 @@ namespace Api.BanHang.Controllers
         }
 
 
-        [Route("search-product")]
+        [Route("search-product-by-name")]
         [HttpPost]
-        public IActionResult Search([FromBody] Dictionary<string, object> formData)
+        public IActionResult SearchByName([FromBody] Dictionary<string, object> formData)
         {
             var response = new ResponseModel();
             try
@@ -137,10 +137,76 @@ namespace Api.BanHang.Controllers
                 var pageSize = int.Parse(formData["pageSize"].ToString());
                 string product_name = ""; 
                 if (formData.Keys.Contains("product_name") && !string.IsNullOrEmpty(Convert.ToString(formData["product_name"]))) { product_name = Convert.ToString(formData["product_name"]); }
-                int fr_price = formData.ContainsKey("fr_price") && int.TryParse(formData["fr_price"].ToString(), out var fr_priceValue) ? fr_priceValue : 0;
-                int to_price = formData.ContainsKey("to_price") && int.TryParse(formData["to_price"].ToString(), out var to_priceValue) ? to_priceValue : 0;
                 long total = 0;
-                var data = _productBusiness.Search(page, pageSize, out total, product_name, fr_price, to_price);
+                var data = _productBusiness.SearchByName(page, pageSize, out total, product_name);
+                return Ok(
+                   new
+                   {
+                       TotalItems = total,
+                       Data = data,
+                       Page = page,
+                       PageSize = pageSize
+                   }
+                   );
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [Route("search-product-by-price")]
+        [HttpPost]
+        public IActionResult SearchByPrice([FromBody] Dictionary<string, object> formData)
+        {
+            var response = new ResponseModel();
+            try
+            {
+                var page = int.Parse(formData["page"].ToString());
+                var pageSize = int.Parse(formData["pageSize"].ToString());
+                decimal fr_price = formData.ContainsKey("fr_price") && decimal.TryParse(formData["fr_price"].ToString(), out var fr_priceValue) ? fr_priceValue : 0;
+                decimal to_price = formData.ContainsKey("to_price") && decimal.TryParse(formData["to_price"].ToString(), out var to_priceValue) ? to_priceValue : 0;
+                long total = 0;
+                var data = _productBusiness.SearchByPrice(page, pageSize, out total, fr_price, to_price);
+                return Ok(
+                   new
+                   {
+                       TotalItems = total,
+                       Data = data,
+                       Page = page,
+                       PageSize = pageSize
+                   }
+                   );
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [Route("search-product-by-date")]
+        [HttpPost]
+        public IActionResult SearchByDate([FromBody] Dictionary<string, object> formData)
+        {
+            var response = new ResponseModel();
+            try
+            {
+                var page = int.Parse(formData["page"].ToString());
+                var pageSize = int.Parse(formData["pageSize"].ToString());
+                DateTime? fr_date = null;
+                if (formData.Keys.Contains("fr_date") && formData["fr_date"] != null && formData["fr_date"].ToString() != "")
+                {
+                    var dt = Convert.ToDateTime(formData["fr_date"].ToString());
+                    fr_date = new DateTime(dt.Year, dt.Month, dt.Day, 0, 0, 0, 0);
+                }
+                DateTime? to_date = null;
+                if (formData.Keys.Contains("to_date") && formData["to_date"] != null && formData["to_date"].ToString() != "")
+                {
+                    var dt = Convert.ToDateTime(formData["to_date"].ToString());
+                    to_date = new DateTime(dt.Year, dt.Month, dt.Day, 23, 59, 59, 999);
+                }
+                long total = 0;
+                var data = _productBusiness.SearchByDate(page, pageSize, out total, fr_date, to_date);
                 return Ok(
                    new
                    {

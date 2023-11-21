@@ -9,15 +9,10 @@ namespace BusinessLogicLayer
 {
     public partial interface ICategoryBusiness
     {
-        SubCategoriesModel GetCategorybyID(string id);
 
-        SubCategoriesModel GetProductByCategoryName(string name);
+        bool Create(CategoryMainModel model);
 
-        List<SubCategoriesModel> GetAllCategories();
-
-        bool Create(SubCategoriesModel model);
-
-        bool Update(SubCategoriesModel model);
+        bool Update(CategoryMainModel model);
 
         bool Delete(string id);
     }

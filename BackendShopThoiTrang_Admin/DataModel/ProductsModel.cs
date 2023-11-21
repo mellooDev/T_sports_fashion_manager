@@ -16,9 +16,9 @@
 
         public int product_quantity { get; set; }
 
-        public DateTime? created_date { get; set; }
+        public DateTime created_date { get; set; }
 
-        public DateTime? updated_date { get; set; }
+        public DateTime updated_date { get; set; }
 
         public int category_id { get; set; }
 

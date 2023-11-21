@@ -9,7 +9,6 @@ namespace DataAccessLayer
 {
     public partial interface ICategoryRepository
     {
-        CategoryMainModel GetCategoryMainbyID(string id);
 
         bool Create(CategoryMainModel model);
 
