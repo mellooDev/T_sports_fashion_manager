@@ -20,7 +20,7 @@
 
         public DateTime updated_date { get; set; }
 
-        public int category_id { get; set; }
+        public int subCategory_id { get; set; }
 
         public int brand_id { get; set; }
 

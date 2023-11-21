@@ -97,7 +97,7 @@ namespace DataAccessLayer
                     "@image_link", model.image_link,
                     "@product_quantity", model.product_quantity,
                     "@updated_date", model.updated_date,
-                    "@category_id", model.category_id,
+                    "@subCategory_id", model.subCategory_id,
                     "@brand_id", model.brand_id);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
@@ -126,7 +126,7 @@ namespace DataAccessLayer
                     "@product_quantity", model.product_quantity,
                     "@created_date", model.created_date,
                     "@updated_date", model.updated_date,
-                    "@category_id", model.category_id,
+                    "@subCategory_id", model.subCategory_id,
                     "@brand_id", model.brand_id);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {

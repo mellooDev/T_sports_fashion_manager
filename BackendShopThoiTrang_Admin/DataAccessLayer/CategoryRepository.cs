@@ -20,7 +20,7 @@ namespace DataAccessLayer
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create_category",
                     "@categoryMain_name", model.categoryMain_name,
-                    "@list_json_sub_category", model.list_json_sub_category);
+                    "@list_json_sub_category", model.list_json_sub_category != null ? MessageConvert.SerializeObject(model.list_json_sub_category) : null);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -41,7 +41,7 @@ namespace DataAccessLayer
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_update_category",
                     "@categoryMain_id", model.categoryMain_id,
                     "@categoryMain_name", model.categoryMain_name,
-                    "@list_json_sub_category", model.list_json_sub_category);
+                    "@list_json_sub_category", model.list_json_sub_category != null ? MessageConvert.SerializeObject(model.list_json_sub_category) : null);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);

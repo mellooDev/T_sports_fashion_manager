@@ -34,6 +34,20 @@ namespace Api.BanHang.Controllers
             return model;
         }
 
+        [Route("get-acc-by-id/{id}")]
+        [HttpGet]
+        public AccountModel GetAccountByID(string id)
+        {
+            return _accountBusiness.GetAccountByID(id);
+        }
+
+        [Route("get-acc-by-username/{username}")]
+        [HttpGet]
+        public AccountModel GetAccountByUsername(string username)
+        {
+            return _accountBusiness.GetAccountByUsername(username);
+        }
+
         [Route("create-account")]
         [HttpPost]
         public AccountModel Create([FromBody] AccountModel model)
