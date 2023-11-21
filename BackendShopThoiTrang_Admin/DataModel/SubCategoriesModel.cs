@@ -10,5 +10,7 @@
 
         public List<ProductsModel> list_json_product_by_subcate { get; set; }
 
+        public int status { get; set; }
+
     }
 }

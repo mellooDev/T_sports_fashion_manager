@@ -23,8 +23,8 @@ namespace BusinessLogicLayer
 
         public AccountModel Login(string username, string password)
         {
-            var admin_account = _res.Login(username, password);
-            if (admin_account == null)
+            var account = _res.Login(username, password);
+            if (account == null)
                 return null;
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secret);
@@ -32,17 +32,46 @@ namespace BusinessLogicLayer
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, admin_account.username.ToString()),
-                    new Claim(ClaimTypes.Email, admin_account.email),
-                    new Claim(ClaimTypes.StreetAddress, admin_account.address.ToString()),
-                    new Claim(ClaimTypes.Role, admin_account.role_id.ToString())
+                    new Claim(ClaimTypes.Name, account.username.ToString()),
+                    new Claim(ClaimTypes.Role, account.role_id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(20),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128CbcHmacSha256)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            admin_account.token = tokenHandler.WriteToken(token);
-            return admin_account;
+            account.token = tokenHandler.WriteToken(token);
+            return account;
         }
+
+        public AccountModel GetAccountByID(string id)
+        {
+            return _res.GetAccountByID(id);
+        }
+
+        public AccountModel GetAccountByUsername(string username)
+        {
+            return _res.GetAccountByUsername(username);
+        }
+
+        public bool SignUp(AccountModel model)
+        {
+            return _res.SignUp(model);
+        }
+
+        public bool Create(AccountModel model)
+        {
+            return _res.Create(model);
+        }
+
+        public bool Update(AccountModel model)
+        {
+            return _res.Update(model);
+        }
+
+        public bool Delete(string id)
+        {
+            return _res.Delete(id);
+        }
+
     }
 }

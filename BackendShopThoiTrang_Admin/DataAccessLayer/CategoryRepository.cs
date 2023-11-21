@@ -61,14 +61,31 @@ namespace DataAccessLayer
             }
         }
 
+        public List<SubCategoriesModel> GetProductByCategoryName()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_all_category");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<SubCategoriesModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        public bool Create(SubCategoriesModel model)
+
+        public bool Create(CategoryMainModel model)
         {
             string msgError = "";
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create_category",
-                    "@category_name", model.category_name);
+                    "@categoryMain_name", model.categoryMain_name,
+                    "@list_json_sub_category", model.list_json_sub_category);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -81,14 +98,15 @@ namespace DataAccessLayer
             }
         }
 
-        public bool Update(SubCategoriesModel model)
+        public bool Update(CategoryMainModel model)
         {
             string msgError = "";
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_update_category",
-                    "@category_id", model.category_id,
-                    "@category_name", model.category_name);
+                    "@categoryMain_id", model.categoryMain_id,
+                    "@categoryMain_name", model.categoryMain_name,
+                    "@list_json_sub_category", model.list_json_sub_category);
                 if ((result != null && string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);

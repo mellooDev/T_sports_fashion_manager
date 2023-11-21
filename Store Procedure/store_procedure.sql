@@ -11,16 +11,12 @@ go
 --create role
 create proc sp_create_role
 (
-	@role_id int,
 	@role_name varchar(20)
 )
 as
 begin
-	if not exists (select 1 from Roles where role_id = @role_id)
-	begin
-		insert into Roles(role_name)
-		values(@role_name)
-	end
+	insert into Roles(role_name)
+	values(@role_name)
 end
 go
 
@@ -131,7 +127,7 @@ begin
 		password,
 		role_id
 	)
-	VALUES(@username, @password);
+	VALUES(@username, @password, @role_id);
 	SET @account_id = (select SCOPE_IDENTITY())
 	IF(@list_json_account_details is not null)
 	BEGIN
@@ -144,18 +140,18 @@ begin
 			gender
 		)
 			select @account_id,
-					JSON_VALUE(l.value, "$.full_name"),
-					JSON_VALUE(l.value, "$.address"),
-					JSON_VALUE(l.value, "$.phone_number"),
-					JSON_VALUE(l.value, "$.email"),
-					JSON_VALUE(l.value, "$.gender")
+					JSON_VALUE(l.value, '$.full_name'),
+					JSON_VALUE(l.value, '$.address'),
+					JSON_VALUE(l.value, '$.phone_number'),
+					JSON_VALUE(l.value, '$.email'),
+					JSON_VALUE(l.value, '$.gender')
 			from openjson(@list_json_account_details) as l;
 	END
 	SELECT '';
 end
 go
 
---update customer
+--update account
 create proc sp_update_account
 (
 	@account_id int,
@@ -494,9 +490,9 @@ BEGIN
 	END
 END
 GO
+--(ran)
 
-
---Products
+--Products (not run)
 --get product by id
 create proc sp_get_product_by_id
 (
