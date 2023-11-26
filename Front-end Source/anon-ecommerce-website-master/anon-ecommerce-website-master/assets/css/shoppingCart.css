@@ -916,7 +916,7 @@ table tbody tr td {
 
 .coupon button,
 .subtotal button {
-    background-color: #088178;
+    background-color: hsl(353, 100%, 78%);
     color: #fff;
     padding: 12px 20px;
     border-radius: 6px;

@@ -1,0 +1,256 @@
+:root {
+
+  /**
+   * colors
+   */
+
+  --spanish-gray: hsl(0, 0%, 60%);
+  --sonic-silver: hsl(0, 0%, 47%);
+  --eerie-black: hsl(0, 0%, 13%);
+  --salmon-pink: hsl(353, 100%, 78%);
+  --sandy-brown: hsl(29, 90%, 65%);
+  --bittersweet: hsl(0, 100%, 70%);
+  --ocean-green: hsl(152, 51%, 52%);
+  --davys-gray: hsl(0, 0%, 33%);
+  --cultured: hsl(0, 0%, 93%);
+  --white: hsl(0, 100%, 100%);
+  --onyx: hsl(0, 0%, 27%);
+
+  /**
+   * typography
+   */
+
+  --fs-1: 1.563rem;
+  --fs-2: 1.375rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.125rem;
+  --fs-5: 1rem;
+  --fs-6: 0.938rem;
+  --fs-7: 0.875rem;
+  --fs-8: 0.813rem;
+  --fs-9: 0.75rem;
+  --fs-10: 0.688rem;
+  --fs-11: 0.625rem;
+
+  --weight-300: 300;
+  --weight-400: 400;
+  --weight-500: 500;
+  --weight-600: 600;
+  --weight-700: 700;
+
+  /**
+   * border-radius
+   */
+
+  --border-radius-md: 10px;
+  --border-radius-sm: 5px;
+
+  /**
+   * transition 
+   */
+
+  --transition-timing: 0.2s ease;
+
+}
+
+
+
+
+
+/*-----------------------------------*\
+  #RESET
+\*-----------------------------------*/
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a { text-decoration: none; }
+
+li { list-style: none; }
+
+button {
+  background: none;
+  font: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+img, ion-icon, button, a { display: block; }
+
+span { display: inline-block; }
+
+html {
+  font-family: 'Lexend', sans-serif;
+  -ms-scroll-chaining: none;
+      overscroll-behavior: contain;
+}
+
+input {
+  display: block;
+  width: 100%;
+  font: inherit;
+}
+
+input::-webkit-input-placeholder { font: inherit; }
+
+input::-moz-placeholder { font: inherit; }
+
+input:-ms-input-placeholder { font: inherit; }
+
+input::-ms-input-placeholder { font: inherit; }
+
+input::placeholder { font: inherit; }
+
+body { background: #f5f5f5; }
+
+/**
+ * scrollbar style
+ */
+
+body::-webkit-scrollbar { width: 15px; }
+
+body::-webkit-scrollbar-track {
+  background: var(--white);
+  border-left: 1px solid var(--cultured);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 80%);
+  border: 3px solid var(--white);
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
+
+
+
+
+
+/*-----------------------------------*\
+  #REUSED STYLE
+\*-----------------------------------*/
+
+.container { padding: 0 15px; }
+
+.has-scrollbar { padding-bottom: 5px; }
+
+.has-scrollbar::-webkit-scrollbar {
+  width: 12px; /* for vertical scroll */
+  height: 12px; /* for horizontal scroll */
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 3px solid var(--white);
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
+}
+
+.has-scrollbar:hover::-webkit-scrollbar-thumb { background: hsl(0, 0%, 90%); }
+
+.has-scrollbar::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 80%); }
+
+.title {
+  color: var(--eerie-black);
+  font-size: var(--fs-5);
+  font-weight: var(--weight-600);
+  letter-spacing: 0.4px;
+  text-transform: capitalize;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--cultured);
+  margin-bottom: 30px;
+}
+
+
+nav {
+    display: flex;
+    align-items: center;
+    padding: 20px 7%;
+    background-color: #fff;
+}
+
+nav .header-title {
+    padding-left: 20px;
+    border-left: 2px solid #000;
+    padding-top: 5px;
+    font-size: 1.2rem;
+}
+
+.checkout-container {
+    width: 1200px;
+    margin: 30px auto 70px;
+    background-color: #fff;
+    display: flex;
+    padding: 20px 30px;
+}
+
+.checkout-info {
+    width: 55%;
+}
+
+.checkout-info h3 {
+    font-size: 1rem;
+}
+
+.checkout-info .name-info {
+    margin-top: 30px;
+}
+
+.checkout-info .name-info,
+.checkout-info .email-info,
+.checkout-info .phone-info {
+    margin-bottom: 15px;
+}
+
+.checkout-info .address-info-container {
+    margin-bottom: 30px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container input,
+.input-container select,
+.input-container textarea {
+
+    padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid;
+    width: 100%;
+}
+
+
+.input-container label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    background: white;
+    padding: 0 5px;
+    margin: 10px 0;
+    transition: all 0.3s;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label,
+.input-container select:focus + label,
+.input-container select:not(:placeholder-shown) + label,
+.input-container textarea:focus + label,
+.input-container textarea:not(:placeholder-shown) + label {
+    top: -20px;
+    font-size: 12px;
+    color: gray;
+}
+
+.address-info-container {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
