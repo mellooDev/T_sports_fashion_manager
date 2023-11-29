@@ -355,7 +355,7 @@ go
 
 --category main
 --create
-CREATE PROC sp_create_category
+create PROC sp_create_category
 (
 	@categoryMain_name NVARCHAR(100),
 	@list_json_sub_category NVARCHAR(MAX)
@@ -381,6 +381,7 @@ BEGIN
 	select '';
 END
 GO
+
 
 --UPDATE
 CREATE proc sp_update_category(
@@ -972,7 +973,7 @@ create proc [dbo].[sp_create_import]
  @list_json_import_details NVARCHAR(MAX)
 )
 AS
-    BEGIN
+	BEGIN
 		DECLARE @import_id INT;
         INSERT INTO Import
                 (category_id, 
